@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup - CONFINTER Site e Painel Administrativo</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Raleway:300,400,500,600,700|Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="lib/nivo-slider/css/nivo-slider.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="admin/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="admin/assets/css/animate.css">
+    <link rel="stylesheet" href="admin/assets/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="admin/assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="admin/assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="admin/assets/css/style.css">
+
+    <style>
+        .tabs { display: flex; border-bottom: 1px solid #ccc; }
+        .tab { padding: 10px 20px; cursor: pointer; background-color: #f1f1f1; border: 1px solid #ccc; }
+        .tab.active { background-color: white; border-bottom: 1px solid white; }
+        .tab-content { display: none; padding: 20px; }
+        .tab-content.active { display: block; }
+        .mock-placeholder { background-color: #e9ecef; padding: 20px; text-align: center; border: 1px solid #ccc; margin: 20px 0; }
+        .floating-buttons { position: fixed; top: 50%; right: 20px; z-index: 1000; }
+        .floating-buttons a { display: block; margin: 10px 0; font-size: 24px; color: #007bff; }
+    </style>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</head>
+<body>
+    <!-- Menu Flutuante -->
+    <div class="floating-buttons">
+        <a href="https://www.instagram.com/confintersp?igsh=a3NuaGJrem5pYzZu" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=11948016298" target="_blank" class="whatsapp"><i class="bi bi-whatsapp"></i></a>
+        <a href="mailto:contato@confinter.com.br" class="email"><i class="bi bi-envelope-at"></i></a>
+    </div>
+
+    <!-- Header -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto active" href="#sobre">Sobre</a></li>
+                    <li><a class="nav-link scrollto" href="#valores">Nossos Valores</a></li>
+                    <li><a class="nav-link scrollto" href="#servicos">Serviços</a></li>
+                    <li><a class="nav-link scrollto" href="#requi">Requisições</a></li>
+                    <li><a class="nav-link scrollto" href="#faq">Dúvidas</a></li>
+                    <li><a class="nav-link scrollto" href="#depoimentos">Depoimentos</a></li>
+                    <li><a class="nav-link scrollto" href="#chegar">Como Chegar</a></li>
+                    <li><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top: 100px;">
+        <div class="tabs">
+            <div class="tab active" onclick="openTab(event, 'home')">Página Inicial</div>
+            <div class="tab" onclick="openTab(event, 'login')">Login Admin</div>
+            <div class="tab" onclick="openTab(event, 'admin-dashboard')">Dashboard Admin</div>
+            <div class="tab" onclick="openTab(event, 'user-management')">Gerenciamento de Usuários</div>
+            <div class="tab" onclick="openTab(event, 'client-management')">Gerenciamento de Clientes</div>
+            <div class="tab" onclick="openTab(event, 'analysis-exploratory')">Análise Exploratória</div>
+            <div class="tab" onclick="openTab(event, 'predictions')">Previsões</div>
+            <div class="tab" onclick="openTab(event, 'dashboard-main')">Dashboard Principal</div>
+            <div class="tab" onclick="openTab(event, 'realtime-monitoring')">Monitoramento Tempo Real</div>
+            <div class="tab" onclick="openTab(event, 'registration')">Cadastro</div>
+            <div class="tab" onclick="openTab(event, 'contact')">Contato</div>
+        </div>
+
+        <!-- Página Inicial -->
+        <div id="home" class="tab-content active">
+            <section id="hero">
+                <div class="hero-container">
+                    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+                        <ol class="carousel-indicators">
+                            <li data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></li>
+                            <li data-bs-target="#heroCarousel" data-bs-slide-to="1"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" style="background-image: url('assets/img/hero-carousel/1.jpg')">
+                                <div class="carousel-container">
+                                    <div class="container">
+                                        <h2 class="animate__animated animate__fadeInDown">CONFINTER - Consolidando Sonhos</h2>
+                                        <p class="animate__animated animate__fadeInUp">Seu parceiro em soluções financeiras.</p>
+                                        <a href="#sobre" class="btn-get-started animate__animated animate__fadeInUp scrollto">Saiba Mais</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" style="background-image: url('assets/img/hero-carousel/2.jpg')">
+                                <div class="carousel-container">
+                                    <div class="container">
+                                        <h2 class="animate__animated animate__fadeInDown">Consultoria Financeira Especializada</h2>
+                                        <p class="animate__animated animate__fadeInUp">Ajudamos você a alcançar seus objetivos financeiros.</p>
+                                        <a href="#servicos" class="btn-get-started animate__animated animate__fadeInUp scrollto">Nossos Serviços</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <main id="main">
+                <!-- Seção Sobre -->
+                <section id="sobre" class="about">
+                    <div class="container" data-aos="fade-up">
+                        <div class="section-headline text-center">
+                            <h2>Sobre Nós</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="darkmode-white-text">
+                                    <p>A <strong>CONFINTER</strong> é uma empresa especializada em Consultoria Financeira e Correspondente Bancário que atua na intermediação de negócios, presencialmente e online.</p>
+                                    <p>Seguimos as diretrizes do Banco Central do Brasil, nos termos da Resolução no 3.954/2011. Nosso procedimento de avaliação de crédito é submetido à política de crédito da Instituição Financeira escolhida pelo usuário e está submetida a aprovação.</p>
+                                    <p>Antes da contratação de qualquer serviço através de nossos parceiros e consultores, você receberá todas as condições e informações relativas à linha de crédito a ser contratada, de forma completa e transparente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção Valores -->
+                <section id="valores" class="services section-bg">
+                    <div class="container" data-aos="fade-up">
+                        <div class="section-headline text-center">
+                            <h2>Nossos Valores</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                                <div class="icon-box iconbox-blue">
+                                    <div class="icon">
+                                        <img src="assets/img/missao.png" alt="Missão">
+                                    </div>
+                                    <h4>Missão</h4>
+                                    <p>Facilitar o acesso a crédito consignado e fornecer consultoria financeira personalizada, visando o equilíbrio e bem-estar financeiro dos nossos clientes.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+                                <div class="icon-box iconbox-orange">
+                                    <div class="icon">
+                                        <img src="assets/img/visao.png" alt="Visão">
+                                    </div>
+                                    <h4>Visão</h4>
+                                    <p>Ser reconhecida como a empresa líder em intermediação de negócios, destacando-se pela excelência no atendimento ao cliente e pela construção de relacionamentos sólidos e duradouros.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
+                                <div class="icon-box iconbox-pink">
+                                    <div class="icon">
+                                        <img src="assets/img/valores.png" alt="Valores">
+                                    </div>
+                                    <h4>Valores</h4>
+                                    <p><strong>Transparência:</strong> Agimos com total transparência...<br><strong>Comprometimento:</strong> Nos dedicamos...<br><strong>Respeito:</strong> Valorizamos...<br><strong>Sustentabilidade:</strong> Comprometemo-nos...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção Serviços -->
+                <section id="servicos" class="services-area area-padding">
+                    <div class="container" data-aos="fade-up">
+                        <div class="section-title text-center">
+                            <h2>Nossos Serviços</h2>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-3 col-sm-6">
+                                <div class="single-services">
+                                    <div class="service-box">
+                                        <i class="bi bi-briefcase icon-help"></i>
+                                        <h4>Consultoria</h4>
+                                        <p>Nossos especialistas ajudarão desde a abertura de contas até delinear a melhor estratégia...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="single-services">
+                                    <div class="service-box">
+                                        <i class="bi bi-person-vcard-fill icon-help"></i>
+                                        <h4>Intermediação</h4>
+                                        <p>Atuando como correspondentes bancários com mais de 15 anos de experiência...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="single-services">
+                                    <div class="service-box">
+                                        <i class="bi bi-credit-card icon-help"></i>
+                                        <h4>Cartões de Crédito</h4>
+                                        <p>Conveniado com os principais bancos, ao todo são mais de 250 convênios...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="single-services">
+                                    <div class="service-box">
+                                        <i class="bi bi-cash-coin icon-help"></i>
+                                        <h4>Saque Aniversário</h4>
+                                        <p>No saque-aniversário você pode sacar o valor que possui em FGTS...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Seção Requisições -->
+                <section id="requi" class="requisicoes section-bg">
+                    <div class="container">
+                        <div class="section-title">
+                            <h2>Requisição de Análise de Crédito</h2>
+                        </div>
+                        <form>
+                            <div class="form-group">
+                                <label>Nome completo:</label>
+                                <input type="text" class="form-control" placeholder="Nome completo">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>Data de Nascimento:</label>
+                                    <input type="text" class="form-control" placeholder="DD/MM/AAAA">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>Telefone:</label>
+                                    <input type="tel" class="form-control" placeholder="(00) 00000-0000">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label>E-mail:</label>
+                                    <input type="email" class="form-control" placeholder="seu@email.com">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Horário para Contato:</label>
+                                    <input type="time" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Categoria:</label>
+                                <div class="form-row">
+                                    <div class="col-md-3"><input type="checkbox"> Aposentado</div>
+                                    <div class="col-md-3"><input type="checkbox"> Pensionista</div>
+                                    <div class="col-md-3"><input type="checkbox"> Servidor Público</div>
+                                    <div class="col-md-3"><input type="checkbox"> Outros</div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Requisição</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Seção Contato -->
+                <section id="chegar" class="contact">
+                    <div class="container" data-aos="fade-up">
+                        <div class="section-headline text-center">
+                            <h2>Contato</h2>
+                        </div>
+                        <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.674620432733!2d-46.34657878502169!3d-23.529135784679013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce43de0d92a6f5%3A0x8f85eeb0c19e3c32!2sMarina%20La%20Regina!5e0!3m2!1sen!2sus!4v1648523258379!5m2!1sen!2sus&hl=pt-BR"></iframe>
+                        <div class="row mt-5">
+                            <div class="col-lg-4 col-md-6">
+                                <h3><img src="assets/img/logo01-black.png" alt="Logo" width="125px"></h3>
+                                <p>Rua Maria la Regina<br>Poá, São Paulo<br>Brasil<br><br>
+                                <i class="bx bx-phone-outgoing"></i> (11)94801-6298<br>
+                                <i class="bx bx-mail-send"></i> contato@confinter.com.br</p>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <h4>Links Úteis</h4>
+                                <ul>
+                                    <li><a href="#sobre">Sobre</a></li>
+                                    <li><a href="#valores">Nossos Valores</a></li>
+                                    <li><a href="#servicos">Serviços</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-5 col-md-6">
+                                <h4>Para Informações</h4>
+                                <p>Cadastre seu E-mail</p>
+                                <input type="email" placeholder="Seu e-mail"><button class="btn btn-primary">Inscreva-se</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Login Admin -->
+        <div id="login" class="tab-content">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container-fluid h-custom">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col-md-6 d-none d-md-block text-center">
+                                    <img src="assets/img/logo01-black.png" class="img-fluid" alt="Logo">
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <form>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" class="form-control form-control-lg" placeholder="Usuário" required />
+                                            <label class="form-label">Usuário</label>
+                                        </div>
+                                        <div class="form-outline mb-3">
+                                            <input type="password" class="form-control form-control-lg" placeholder="Senha" required />
+                                            <label class="form-label">Senha</label>
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Admin -->
+        <div id="admin-dashboard" class="tab-content">
+            <div class="main-wrapper">
+                <div class="header">
+                    <div class="header-left active">
+                        <a href="index.html" class="logo"><img src="assets/img/logo.png" alt=""></a>
+                    </div>
+                    <ul class="nav user-menu">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+                                <span class="user-img"><img src="assets/img/perfil/1.png" alt=""></span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="perfil.php">Meu Perfil</a>
+                                <a class="dropdown-item" href="../index.php">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sidebar">
+                    <div class="sidebar-inner slimscroll">
+                        <div id="sidebar-menu" class="sidebar-menu">
+                            <ul>
+                                <li class="active"><a href="admin.php"><span>Dashboard</span></a></li>
+                                <li><a href="requisicoes.php"><span>Requisições</span></a></li>
+                                <li><a href="listaclientes.php"><span>Clientes</span></a></li>
+                                <li><a href="listarusuario.php"><span>Gerenciar Usuários</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-wrapper">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-12 d-flex">
+                                <div class="dash-count">
+                                    <div class="dash-counts">
+                                        <h3>1,234</h3>
+                                        <h5>Total de Visitas no Site</h5>
+                                    </div>
+                                    <div class="dash-imgs">
+                                        <i data-feather="user"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12 d-flex">
+                                <div class="dash-count das1">
+                                    <div class="dash-counts">
+                                        <h3>56</h3>
+                                        <h5>Total de Depoimentos no Site</h5>
+                                    </div>
+                                    <div class="dash-imgs">
+                                        <i data-feather="user-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12 d-flex">
+                                <div class="dash-count das2">
+                                    <div class="dash-counts">
+                                        <h3>78.5%</h3>
+                                        <h3>1,234</h3>
+                                        <h5>Total de Requisições pelo Site</h5>
+                                    </div>
+                                    <div class="dash-imgs">
+                                        <i data-feather="file-text"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12 d-flex">
+                                <div class="dash-count das3">
+                                    <div class="dash-counts">
+                                        <h3>5:32</h3>
+                                        <h5>Total de tempo no Site</h5>
+                                    </div>
+                                    <div class="dash-imgs">
+                                        <i data-feather="clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <h4 class="card-title">Requisições Recentes</h4>
+                                <div class="table-responsive dataview">
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>E-mail</th>
+                                                <th>Telefone</th>
+                                                <th>Categoria</th>
+                                                <th>Data</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>João Silva</td>
+                                                <td>joao@example.com</td>
+                                                <td>(11) 99999-9999</td>
+                                                <td>Aposentado</td>
+                                                <td>2025-09-06</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Maria Santos</td>
+                                                <td>maria@example.com</td>
+                                                <td>(11) 88888-8888</td>
+                                                <td>Pensionista</td>
+                                                <td>2025-09-05</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Carlos Oliveira</td>
+                                                <td>carlos@example.com</td>
+                                                <td>(11) 77777-7777</td>
+                                                <td>Servidor Público</td>
+                                                <td>2025-09-04</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Outras seções com placeholders fiéis -->
+        <!-- Gerenciamento de Usuários -->
+        <div id="user-management" class="tab-content">
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="page-title">Listar Usuários</h3>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                    <li class="breadcrumb-item active">Listar Usuários</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Usuários Cadastrados</h4>
+                                    <a href="novousuario.php" class="btn btn-primary">Cadastrar Novo Usuário</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <label class="checkboxs">
+                                                            <input type="checkbox">
+                                                            <span class="checkmarks"></span>
+                                                        </label>
+                                                    </th>
+                                                    <th>Nome</th>
+                                                    <th>Telefone</th>
+                                                    <th>Email</th>
+                                                    <th>Perfil</th>
+                                                    <th>Ação</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkboxs">
+                                                            <input type="checkbox">
+                                                            <span class="checkmarks"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td>João Silva</td>
+                                                    <td>(11) 99999-9999</td>
+                                                    <td>joao@example.com</td>
+                                                    <td>Administrador</td>
+                                                    <td>
+                                                        <a href="editusuario.php?id=1" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                        <a href="#" class="btn btn-sm btn-outline-danger">Excluir</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkboxs">
+                                                            <input type="checkbox">
+                                                            <span class="checkmarks"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td>Maria Santos</td>
+                                                    <td>(11) 88888-8888</td>
+                                                    <td>maria@example.com</td>
+                                                    <td>Usuário</td>
+                                                    <td>
+                                                        <a href="editusuario.php?id=2" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                        <a href="#" class="btn btn-sm btn-outline-danger">Excluir</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkboxs">
+                                                            <input type="checkbox">
+                                                            <span class="checkmarks"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td>Carlos Oliveira</td>
+                                                    <td>(11) 77777-7777</td>
+                                                    <td>carlos@example.com</td>
+                                                    <td>Moderador</td>
+                                                    <td>
+                                                        <a href="editusuario.php?id=3" class="btn btn-sm btn-outline-primary">Editar</a>
+                                                        <a href="#" class="btn btn-sm btn-outline-danger">Excluir</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="client-management" class="tab-content">
+            <div class="mock-placeholder">Gerenciamento de Clientes - Lista de clientes, edição.</div>
+        </div>
+        <div id="analysis-exploratory" class="tab-content">
+            <div class="mock-placeholder">Análise Exploratória - Gráficos de visitas, métricas.</div>
+        </div>
+        <div id="predictions" class="tab-content">
+            <div class="mock-placeholder">Previsões - Algoritmos de ML em PHP, gráficos de picos.</div>
+        </div>
+        <div id="dashboard-main" class="tab-content">
+            <div class="mock-placeholder">Dashboard Principal - Visualizações com Chart.js.</div>
+        </div>
+        <div id="realtime-monitoring" class="tab-content">
+            <div class="mock-placeholder">Monitoramento Tempo Real - Atualização automática.</div>
+        </div>
+        <div id="registration" class="tab-content">
+            <div class="mock-placeholder">Cadastro - Formulário de registro de usuário.</div>
+        </div>
+        <div id="contact" class="tab-content">
+            <div class="mock-placeholder">Contato - Formulário de contato.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">&copy; 2025 CONFINTER - Todos os direitos reservados.</div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        // Initialize AOS
+        AOS.init();
+        
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('#heroCarousel');
+            if (carousel) {
+                new bootstrap.Carousel(carousel, {
+                    interval: 5000,
+                    wrap: true
+                });
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container d-md-flex py-4">
+                <div class="me-md-auto text-center text-md-start">
+                    <div class="copyright darkmode-white-text">
+                        &copy; Copyright <strong><span>CONFINTER 2025</span></strong>. Todos os Direitos Reservados.
+                    </div>
+                    <div class="credits">
+                        Desenvolvido por <a href="https://github.com/finandolopes/DRP01-Projeto-Integrador-em-Computa-o-II-Turma-006">DRP01 Projeto Integrador em Computação II Turma 006</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

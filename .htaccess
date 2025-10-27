@@ -1,0 +1,202 @@
+# =====================================================
+# CONFINTER - Arquivo .htaccess
+# Configurações de segurança e otimização
+# Data: 06/09/2025
+# =====================================================
+
+# Ativar RewriteEngine
+RewriteEngine On
+
+# =====================================================
+# SEGURANÇA
+# =====================================================
+
+# Proteger arquivos sensíveis
+<Files "config.php">
+    Require all denied
+</Files>
+
+<Files "php/conexao.php">
+    Require all denied
+</Files>
+
+<Files "*.sql">
+    Require all denied
+</Files>
+
+<Files "*.log">
+    Require all denied
+</Files>
+
+# Bloquear acesso a diretórios sensíveis
+RedirectMatch 404 /\.git
+RedirectMatch 404 /\.env
+RedirectMatch 404 /composer\.json
+RedirectMatch 404 /composer\.lock
+
+# =====================================================
+# REDIRECIONAMENTOS HTTPS (DESCOMENTE SE USAR SSL)
+# =====================================================
+
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# =====================================================
+# OTIMIZAÇÃO DE CACHE
+# =====================================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # CSS e JavaScript - 1 mês
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+
+    # Imagens - 1 mês
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 month"
+
+    # Fontes - 1 mês
+    ExpiresByType font/truetype "access plus 1 month"
+    ExpiresByType font/opentype "access plus 1 month"
+    ExpiresByType application/x-font-woff "access plus 1 month"
+    ExpiresByType application/font-woff2 "access plus 1 month"
+
+    # HTML e XML - 1 hora
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType application/xml "access plus 1 hour"
+    ExpiresByType application/json "access plus 1 hour"
+
+    # Páginas dinâmicas - sem cache
+    ExpiresByType text/php "access plus 0 seconds"
+</IfModule>
+
+# =====================================================
+# COMPRESSÃO GZIP
+# =====================================================
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# =====================================================
+# SEGURANÇA CONTRA ATAQUES COMUNS
+# =====================================================
+
+# Bloquear acesso por user-agent suspeito
+<RequireAll>
+    Require all granted
+    Require not expr "%{HTTP_USER_AGENT} =~ /libwww-perl|BBBike|wget|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner|python-requests/"
+</RequireAll>
+
+# Limitar tamanho de upload
+LimitRequestBody 5242880
+
+# =====================================================
+# CONFIGURAÇÕES PHP (SE MOD_PHP)
+# =====================================================
+
+<IfModule mod_php.c>
+    php_value upload_max_filesize 5M
+    php_value post_max_size 8M
+    php_value memory_limit 128M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
+
+# =====================================================
+# REGRAS DE REESCRITA PARA URLS AMIGÁVEIS
+# =====================================================
+
+# TEMPORARIAMENTE DESABILITADO PARA TESTE - Problema com admin
+# RewriteCond %{REQUEST_URI} !^/admin/
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME}\.php -f
+# RewriteRule ^(.*)$ $1.php
+
+# Redirecionar URLs antigas (se necessário)
+# RewriteRule ^antiga-pagina$ /nova-pagina [R=301,L]
+
+# =====================================================
+# BLOQUEIO DE ACESSO DIRETO A DIRETÓRIOS
+# =====================================================
+
+# Impedir listagem de diretórios
+Options -Indexes
+
+# Bloquear acesso a .htaccess
+<Files ".htaccess">
+    Require all denied
+</Files>
+
+# =====================================================
+# LOGS DE ACESSO
+# =====================================================
+
+# Configurar logs customizados (se necessário)
+# CustomLog logs/access.log combined
+# ErrorLog logs/error.log
+
+# =====================================================
+# CONFIGURAÇÕES DE MANUTENÇÃO
+# =====================================================
+
+# Página de manutenção (descomente quando necessário)
+# RewriteCond %{REQUEST_URI} !/maintenance.html$
+# RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|gif)$
+# RewriteRule $ /maintenance.html [R=307,L]
+
+# =====================================================
+# CONFIGURAÇÕES DE CORS (se usar API)
+# =====================================================
+
+<IfModule mod_headers.c>
+    # Permitir CORS para API
+    <FilesMatch "\.(php)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+        Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+    </FilesMatch>
+</IfModule>
+
+# =====================================================
+# OTIMIZAÇÃO DE PERFORMANCE
+# =====================================================
+
+# Desabilitar ETags
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
+
+# Configurar Keep-Alive
+<IfModule mod_headers.c>
+    Header set Connection keep-alive
+</IfModule>
+
+# =====================================================
+# CONFIGURAÇÕES DE ERROR PAGES
+# =====================================================
+
+# Páginas de erro customizadas
+# ErrorDocument 404 /404.html
+# ErrorDocument 500 /500.html
+# ErrorDocument 403 /403.html
+
+# =====================================================
+# FIM DO ARQUIVO .htaccess
+# =====================================================

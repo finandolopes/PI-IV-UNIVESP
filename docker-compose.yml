@@ -1,0 +1,83 @@
+# =====================================================
+# CONFINTER - Docker Compose
+# Configuração para implantação em containers
+# Data: 06/09/2025
+# =====================================================
+
+version: '3.8'
+
+services:
+  # Servidor Web (Apache + PHP)
+  web:
+    image: php:8.1-apache
+    container_name: confinter-web
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/php.ini:/usr/local/etc/php/php.ini
+    depends_on:
+      - db
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    networks:
+      - confinter-network
+
+  # Banco de dados MySQL
+  db:
+    image: mysql:8.0
+    container_name: confinter-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: confinter
+      MYSQL_USER: confinter_user
+      MYSQL_PASSWORD: confinter_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql/esquema_completo_confinter.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
+    networks:
+      - confinter-network
+    command: --default-authentication-plugin=mysql_native_password
+
+  # phpMyAdmin (opcional - para desenvolvimento)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: confinter-phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: confinter_user
+      PMA_PASSWORD: confinter_pass
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+    networks:
+      - confinter-network
+
+  # Redis (opcional - para cache e sessões)
+  redis:
+    image: redis:7-alpine
+    container_name: confinter-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - confinter-network
+
+volumes:
+  db_data:
+  redis_data:
+
+networks:
+  confinter-network:
+    driver: bridge
+
+# =====================================================
+# FIM DO ARQUIVO docker-compose.yml
+# =====================================================

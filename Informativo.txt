@@ -1,0 +1,297 @@
+Site CONFINTER
+Este relatório oferece uma visão geral dos elementos e conceitos utilizados no código do site.
+Linguagens Utilizadas:
+
+PHP (Hypertext Preprocessor):
+Linguagem de programação server-side utilizada para gerar conteúdo dinâmico.
+Utilizada para processar o formulário de login e realizar consultas ao banco de dados.
+Responsável por verificar se o formulário de login foi submetido e por recuperar imagens do carrossel.
+
+HTML (HyperText Markup Language):
+Utilizado para estruturar o conteúdo da página web.
+Define a estrutura básica do documento, incluindo cabeçalho, corpo e rodapé.
+Incorpora elementos para exibir mensagens de sucesso após o envio de depoimentos.
+
+CSS (Cascading Style Sheets):
+Responsável pela apresentação e estilo do conteúdo HTML.
+Define estilos para elementos como botões, formulários e modal.
+
+JavaScript (JS):
+Utilizado para adicionar interatividade à página.
+Realiza validação do formulário antes do envio, exibição de mensagens de erro e remoção de máscaras de entrada de dados.
+
+Conceitos Utilizados:
+Conteúdo Dinâmico:
+Utilização do PHP para processar o formulário de login e recuperar imagens do banco de dados.
+Mensagem de sucesso é exibida dinamicamente após o envio do depoimento.
+
+Validação de Formulário:
+JavaScript é empregado para validar campos do formulário antes do envio.
+Garante que campos obrigatórios sejam preenchidos corretamente pelo usuário.
+
+Responsividade: Utilizado Framework (Bootstrap)
+Utilização de classes do Bootstrap para garantir que a página seja responsiva em diferentes dispositivos.
+Ilustrações:
+
+Layout Responsivo:
+O uso de classes do Bootstrap assegura que o site seja visualizado corretamente em dispositivos móveis e desktop.
+
+Formulário de Login:
+Permite que os usuários façam login no sistema de forma segura e intuitiva.
+
+Mensagens de Sucesso:
+Após o envio de depoimentos, uma mensagem de sucesso é exibida dinamicamente na página.
+
+Modal Login:
+O código define um modal de login com um formulário contendo campos para usuário e senha.
+O formulário envia os dados para php/processa_login.php usando o método POST.
+Há um botão para fechar o modal.
+
+Slider:
+O código cria um slider de imagens com efeitos de transição.
+As imagens são carregadas dinamicamente a partir do diretório img/slider/.
+Cada imagem é exibida dentro de um elemento <img>.
+
+Sobre:
+Esta seção apresenta informações sobre os valores, missão, visão e valores da empresa.
+Os valores são exibidos em dois parágrafos distintos.
+A missão, visão e valores são apresentados em três colunas, cada um com um título e um texto descritivo.
+
+Nossos Serviços:
+Aqui são listados os serviços oferecidos pela empresa.
+Cada serviço é representado por um ícone, título e uma breve descrição.
+Os serviços são exibidos em três colunas.
+
+Requisição de Análise de Crédito:
+Essa parte apresenta um formulário para os clientes solicitarem uma análise de crédito.
+O formulário inclui campos para nome, data de nascimento, telefone, e-mail, horário para contato, tipo de análise e categoria.
+A categoria possui opções de seleção múltipla.
+Há um botão para enviar a requisição.
+
+Dúvidas Frequentes:
+Esta seção apresenta perguntas frequentes em um formato de acordeão.
+Cada pergunta é seguida por uma resposta que pode ser expandida ou recolhida ao clicar na pergunta.
+Três perguntas frequentes são listadas aqui.
+
+Enviar Depoimentos:
+Criamos uma seção para ser enviado depoimentos criado por Clientes onde estes manifestarão sua satisfação ou insatisfação com o serviço prestado.
+
+Depoimentos:
+Abaixo á uma seção para exibir depoimentos aprovados. Esses depoimentos são recuperados do banco de dados e exibidos em um carrossel.
+Finalmente, o rodapé é concluído com informações de direitos autorais e créditos para o desenvolvimento do site.
+
+Rodapé:
+O rodapé começa com uma <footer> tag e é dividido em duas seções principais.
+A primeira seção inclui informações sobre a empresa, como o logotipo, o nome da empresa.
+Em seguida, há um formulário para enviar depoimentos. Os visitantes podem inserir seu nome (opcional) e mensagem para enviar um depoimento.
+
+3 botões laterais que acompanham a navegação pelo site, visando a facilidade de acesso ao WhatsApp, Instagram e E-mail da CONFINTER.
+
+Scripts JavaScript:
+O código HTML inclui vários scripts JavaScript no final do documento para fornecer funcionalidades adicionais, como carrosséis, formulários de contato, efeitos de animação e muito mais.
+Alguns desses scripts são provenientes de bibliotecas externas, como jQuery, Bootstrap e outras.
+Há também alguns scripts personalizados para lidar com eventos específicos da página, como clicar em um botão para abrir um modal.
+
+Observações:
+Com uma mistura de HTML, PHP e JavaScript para fornecer uma experiência interativa e dinâmica aos usuários.
+O formulário de depoimento e a seção de depoimentos aprovados são recursos úteis para envolver os visitantes e construir confiança na empresa.
+O código HTML foi projetado e pronto para fornecer uma experiência de usuário agradável e funcional em um site de consultoria financeira.
+
+Fluxograma do Site:
+Início
+|
+|-- Página Principal
+|   |-- Cabeçalho (com navegação)
+|   |-- Conteúdo Principal
+|   |   |-- Slider imagens com efeitos de transição
+|   |   |-- Sobre - Informações da Empresa
+|   |   |-- Nossos Serviços - Ações realizadas pela empresa
+|   |   |-- Requisição de Análise de Crédito - formulario para envio de requisição de credito
+|   |   |-- Dúvidas Frequentes - Possíveis dúvidas acerca do serviço prestado
+|   |   |-- Dádos da Empresa - CNPJ e Meio fim da Empresa
+|   |   |-- Links para Redes Sociais
+|   |   |-- Formulário de envio de Depoimento
+|   |   |-- Depoimentos Aprovados (em um carrossel)
+|   |   |-- 3 botões laterais para acesso a: Whatsapp, E-mail e Mapa de como chegar 
+|   |-- Rodapé (com informações de direitos autorais e créditos)
+|
+|   
+|
+|-- Modal 
+|   |-- Modal de login (para realização do acesso ao Painel Administrativo)
+|  
+|
+Fim
+
+
+Painel Administrativo:
+Um breve, relatório de análise do código
+Linguagens Utilizadas:
+HTML (HyperText Markup Language):
+Utilizado para estruturar o conteúdo da página web.
+Define a estrutura básica do documento, incluindo cabeçalho, corpo e rodapé.
+Utilizado para criar os elementos da barra de navegação, sidebar, conteúdo principal e scripts.
+
+CSS (Cascading Style Sheets):
+Responsável pela apresentação e estilo do conteúdo HTML.
+Utilizado para definir estilos de elementos como cores, fontes, tamanhos e espaçamentos.
+Controla o layout da página e a aparência visual dos elementos.
+
+PHP (Hypertext Preprocessor):
+Linguagem de programação server-side utilizada para gerar conteúdo dinâmico.
+Incluído no código para possibilitar a inclusão de informações de sessão do usuário e inclusão de arquivos de conexão.
+
+JavaScript (JS):
+Utilizado para adicionar interatividade e funcionalidades dinâmicas à página.
+Responsável por carregar funcionalidades através de requisições AJAX, manipulação do DOM e controle de eventos.
+
+Conceitos Utilizados:
+Responsividade:
+O código utiliza classes do Bootstrap para criar um layout responsivo que se adapta a diferentes tamanhos de tela.
+
+Barra de Navegação (Navbar):
+Implementada utilizando a estrutura padrão do Bootstrap para criar uma barra de navegação fixa no topo da página.
+Inclui o logotipo da empresa, o nome do painel administrativo, informações do usuário e um botão de sair.
+
+Sidebar:
+Criada para fornecer navegação entre as diferentes seções do painel administrativo.
+Utiliza uma lista de links para representar as diferentes funcionalidades disponíveis.
+Implementa um botão de toggle para expandir/retrair o sidebar.
+
+Conteúdo Dinâmico:
+As funcionalidades são carregadas dinamicamente dentro do conteúdo principal da página, sem a necessidade de recarregar a página inteira.
+Isso é feito através de requisições AJAX usando JavaScript para buscar e exibir o conteúdo das funcionalidades.
+
+Transições e Animações:
+Utiliza transições CSS para criar efeitos de animação suaves ao expandir/retrair o sidebar e ao mudar o conteúdo principal.
+Ilustrações:
+
+Layout Responsivo:
+A página se adapta automaticamente a diferentes tamanhos de tela, garantindo uma experiência consistente em dispositivos móveis e desktop.
+
+Barra de Navegação e Sidebar:
+A barra de navegação no topo contém o logotipo, o nome do painel administrativo e informações do usuário.
+A sidebar à esquerda fornece links para diferentes funcionalidades do painel administrativo. Entre elas:
+Dashboard:
+Área em que é exibido quantidade de acessos realizados no site, quantidade de requisições de Análise de Crédito realizado no site, Depoimentos, quantificado quantos depoimentos foram realizados e quantidade de tempo de acesso ao site, listando também os 5 últimos clientes que encaminharam requisições de Análise de Crédito no site.
+Requisições:
+Área em que é listado todos os clientes que entraram em contato requisitando análise de crédito sendo possível realizar a impressão e exportar em arquivo XML.
+Listar Clientes.
+Área em que é possível listar todos os clientes que já contataram a CONFINTER via site.
+Gerenciar Usuários:
+Área em que é possível editar usuário já existente bem como criar novos.
+Acesso ao ERP:
+Área requisitada pelo proprietário da CONFINTER que visa um atalho ao seu link externo de seu sistema ERP.
+Alterar Slides: 
+Seção em que é possível alterar ou excluir os slides da área principal do site.
+Moderar Depoimentos:
+Área responsável por receber e Moderar todos os depoimentos recebidos via site.
+
+Conteúdo Dinâmico:
+O conteúdo das funcionalidades é carregado dinamicamente dentro do contêiner principal da página, sem a necessidade de recarregar a página inteira.
+Essa análise demonstra como o código combina diferentes tecnologias e conceitos para criar um painel administrativo funcional e responsivo.
+
+Fluxograma de funcionamento Painel Administrativo:
+Este fluxograma representa o processo sequencial do código, desde o início até a finalização, incluindo o carregamento de recursos, a interação do usuário, as requisições AJAX e a atualização dinâmica do conteúdo principal da página.
++-----------------+
+|     Início      |
++-----------------+
+        |
+        V
++-----------------+
+|  Carregar HTML  |
+|  e Recursos CSS |
++-----------------+
+        |
+        V
++-----------------+
+|  Carregar      |
+|  JavaScript    |
+|  e Bibliotecas |
++-----------------+
+        |
+        V
++-----------------+
+|   Iniciar      |
+|   Sessão PHP   |
++-----------------+
+        |
+        V
++-----------------+
+|   Exibir       |
+|   Barra de     |
+|   Navegação    |
++-----------------+
+        |
+        V
++-----------------+
+|   Exibir       |
+|   Sidebar      |
++-----------------+
+        |
+        V
++-----------------+
+|   Aguardar     |
+|   Interatividade|
++-----------------+
+        |
+        V
++-----------------+
+|   Requisição   |
+|   de Função    |
+|   (Click)      |
++-----------------+
+        |
+        V
++-----------------+
+|   Enviar       |
+|   Requisição   |
+|   AJAX         |
++-----------------+
+        |
+        V
++-----------------+
+|   Receber e    |
+|   Processar    |
+|   Resposta     |
++-----------------+
+        |
+        V
++-----------------+
+|   Atualizar    |
+|   Conteúdo     |
+|   Principal    |
++-----------------+
+        |
+        V
++-----------------+
+|   Finalizar    |
+|   Exibição     |
++-----------------+
+        |
+        V
++-----------------+
+|      Fim        |
++-----------------+
+
+Referências Bibliográficas:
+
+HTML (HyperText Markup Language):
+Mozilla Developer Network (MDN) - HTML: https://developer.mozilla.org/en-US/docs/Web/HTML
+
+CSS (Cascading Style Sheets):
+W3Schools - CSS Tutorial: https://www.w3schools.com/css/
+MDN Web Docs - CSS: https://developer.mozilla.org/en-US/docs/Web/CSS
+
+PHP (Hypertext Preprocessor):
+PHP.net - Documentation: https://www.php.net/docs.php
+
+JavaScript (JS):
+MDN Web Docs - JavaScript: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+JavaScript.info - The Modern JavaScript Tutorial: https://javascript.info/
+
+Bootstrap:
+Bootstrap Documentation: https://getbootstrap.com/docs/
+
+jQuery:
+jQuery Documentation: https://api.jquery.com/

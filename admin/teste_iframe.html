@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste Iframe</title>
+</head>
+<body>
+    <h1>Teste do Sistema de Iframe</h1>
+    <button onclick="loadInIframe('/admin/listarusuario.php', 'Listar Usuários')">Testar Listar Usuários</button>
+    <button onclick="backToDashboard()">Voltar ao Dashboard</button>
+
+    <div id="iframe-container" style="display: none;">
+        <button id="back-to-dashboard">Voltar ao Dashboard</button>
+        <h4 id="iframe-title"></h4>
+        <iframe id="content-iframe" src="" style="width: 100%; height: 600px; border: none;"></iframe>
+    </div>
+
+    <div id="dashboard-content">
+        <p>Dashboard Content</p>
+    </div>
+
+    <script>
+        // Definir funções globais
+        window.loadInIframe = function(url, title) {
+            console.log('Loading page in iframe:', url, title);
+
+            var iframe = document.getElementById('content-iframe');
+            var titleElement = document.getElementById('iframe-title');
+            var dashboardContent = document.getElementById('dashboard-content');
+            var iframeContainer = document.getElementById('iframe-container');
+
+            if (iframe) iframe.src = url;
+            if (titleElement) titleElement.textContent = title;
+            if (dashboardContent) dashboardContent.style.display = 'none';
+            if (iframeContainer) iframeContainer.style.display = 'block';
+        };
+
+        window.backToDashboard = function() {
+            console.log('Returning to dashboard');
+
+            var iframe = document.getElementById('content-iframe');
+            var dashboardContent = document.getElementById('dashboard-content');
+            var iframeContainer = document.getElementById('iframe-container');
+
+            if (iframe) iframe.src = '';
+            if (dashboardContent) dashboardContent.style.display = 'block';
+            if (iframeContainer) iframeContainer.style.display = 'none';
+        };
+    </script>
+</body>
+</html>

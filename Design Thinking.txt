@@ -1,0 +1,65 @@
+Será Aplicado o Design Thinking para melhorar a responsividade do site e a criar barra de acessibilidade.
+O processo pode ser dividido nas seguintes fases: Empatia, Definição, Ideação, Prototipagem e Teste.
+
+1. Empatia
+Objetivo: Compreender as necessidades dos usuários, especialmente aqueles com deficiências, e como eles interagem com o site.
+
+Ações:
+
+Entrevistas e Pesquisas: Realizar entrevistas com usuários reais, incluindo pessoas com deficiência visual, auditiva e motora, para entender seus desafios ao navegar em sites.
+Mapeamento de Jornada do Usuário: Criar um mapa da jornada do usuário para identificar pontos de frustração e oportunidades de melhoria.
+Análise de Usabilidade: Observar como diferentes tipos de usuários interagem com o site em vários dispositivos (desktop, tablet, mobile).
+Insights:
+
+Necessidade de Acessibilidade: Usuários com deficiências precisam de ferramentas que melhorem a experiência de navegação, como modos de alto contraste, aumentadores de fonte, e tradução em Libras.
+Responsividade: Muitos usuários acessam o site por dispositivos móveis, e a falta de responsividade dificulta a navegação.
+2. Definição
+Objetivo: Definir claramente os problemas a serem resolvidos.
+
+Problemas Identificados:
+
+Barra de Acessibilidade:  Não haviam funções de acessibilidade sendo assim visamos criar uma gerando facilidade ao usuário.
+Falta de Responsividade: O site não se adaptava bem a diferentes tamanhos de tela, dificultando a navegação em dispositivos móveis.
+Integração do VLibras: A implementação do VLibras, possibilitando que os usuários surdos ou com deficiência auditiva utilizassem a ferramenta.
+Declaração do Problema: "Como podemos criar uma barra de acessibilidade intuitiva e responsiva que ofereça funcionalidades essenciais e permita que todos os usuários, independentemente de suas habilidades ou dispositivos, naveguem pelo site de forma eficaz?"
+
+3. Ideação
+Objetivo: Gerar o máximo de ideias possíveis para resolver os problemas identificados.
+
+Brainstorming:
+
+Barra de Acessibilidade Completa: Adicionar funcionalidades como alto contraste, modo escuro, marcador de texto, linha guia, controle de tamanho de fonte e ativação do VLibras.
+Design Responsivo: Implementar CSS responsivo que adapte o layout do site para diferentes dispositivos, garantindo uma experiência de usuário fluida.
+Interface Intuitiva: Utilizar ícones familiares e labels descritivos para tornar a barra de acessibilidade fácil de entender e usar.
+Feedback Visual: Implementar mudanças visuais quando funcionalidades estão ativadas, como mudanças de cor nos botões para indicar que estão em uso.
+Seleção das Melhores Ideias:
+
+Implementação de uma barra de acessibilidade responsiva e rica em funcionalidades.
+Carregamento dinâmico do VLibras ao clicar no ícone, para otimizar o desempenho.
+Melhorias na responsividade do site para garantir acessibilidade em todos os dispositivos.
+4. Prototipagem
+Objetivo: Criar protótipos funcionais das soluções propostas.
+
+Prototipagem da Barra de Acessibilidade:
+
+Criação da Barra: Desenvolver uma barra lateral que se ajuste a diferentes tamanhos de tela e contenha todas as funcionalidades de acessibilidade (alto contraste, modo escuro, marcador, linha guia, controle de fonte, VLibras).
+Carregamento Dinâmico do VLibras: Implementar a funcionalidade de carregamento do VLibras ao clicar no ícone na barra de acessibilidade.
+Responsividade do Site: Ajustar o CSS para que todos os elementos do site se adaptem a diferentes resoluções de tela.
+Ferramentas:
+
+HTML, CSS e JavaScript: Para construir a barra de acessibilidade e ajustar a responsividade.
+Figma ou Adobe XD: Para criar protótipos visuais antes do desenvolvimento, se necessário.
+5. Teste
+Objetivo: Validar as soluções prototipadas com usuários reais e fazer ajustes conforme necessário.
+
+Testes de Usabilidade:
+
+Feedback do Usuário: Convidar usuários reais, especialmente aqueles com deficiências, para testar a nova barra de acessibilidade e a responsividade do site.
+A/B Testing: Comparar a nova versão do site com a antiga para avaliar as melhorias.
+Análise de Dados: Coletar dados sobre a usabilidade, como a facilidade de encontrar e usar a barra de acessibilidade, e como a responsividade afeta a experiência do usuário.
+Ajustes Baseados em Feedback:
+
+Iteração: Fazer ajustes no código e design com base no feedback dos testes, como otimização do carregamento do VLibras, ajustes de layout em dispositivos móveis, etc.
+Melhorias Contínuas: Incorporar um ciclo contínuo de feedback para melhorar ainda mais a acessibilidade e a responsividade.
+Conclusão
+O processo de Design Thinking aplicado à barra de acessibilidade e à responsividade do site resultou em uma solução centrada no usuário que não só melhora a experiência de navegação para pessoas com deficiências, mas também garante que todos os usuários possam acessar o site de maneira eficiente, independentemente do dispositivo que estão utilizando. Este processo criativo e iterativo garantiu que as necessidades reais dos usuários fossem atendidas de forma eficaz e inovadora.

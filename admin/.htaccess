@@ -1,0 +1,20 @@
+# Configurações para o painel administrativo
+RewriteEngine On
+
+# Permitir acesso ao diretório admin
+Require all granted
+
+# Garantir que arquivos PHP sejam processados
+<Files "*.php">
+    SetHandler application/x-httpd-php
+</Files>
+
+# Bloquear acesso a arquivos sensíveis
+<Files "config.php">
+    Require all denied
+</Files>
+
+# Configurações básicas de segurança
+Options -Indexes
+Options +FollowSymLinks
+

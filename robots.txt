@@ -1,0 +1,52 @@
+# =====================================================
+# CONFINTER - Arquivo robots.txt
+# Controle de indexação para motores de busca
+# Data: 06/09/2025
+# =====================================================
+
+# Permitir todos os bots para todas as páginas públicas
+User-agent: *
+Allow: /
+
+# Bloquear acesso a áreas administrativas
+Disallow: /admin/
+Disallow: /php/
+Disallow: /api/
+Disallow: /sql/
+Disallow: /bkp/
+Disallow: /send_email/
+
+# Bloquear arquivos sensíveis
+Disallow: /config.php
+Disallow: /php/conexao.php
+Disallow: /*.sql
+Disallow: /*.log
+Disallow: /*.tmp
+Disallow: /*.bak
+
+# Bloquear diretórios de desenvolvimento
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /vendor/
+
+# Permitir acesso a recursos estáticos
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/img/
+
+# Configurações específicas para Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Configurações específicas para Bingbot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Mapa do site (XML)
+Sitemap: https://seudominio.com/sitemap.xml
+
+# =====================================================
+# FIM DO ARQUIVO robots.txt
+# =====================================================

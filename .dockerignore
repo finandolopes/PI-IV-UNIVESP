@@ -1,0 +1,86 @@
+# =====================================================
+# CONFINTER - Docker Ignore
+# Arquivos a serem ignorados no build Docker
+# Data: 06/09/2025
+# =====================================================
+
+# Arquivos de controle de versão
+.git
+.gitignore
+README.md
+
+# Arquivos de desenvolvimento
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Arquivos temporários
+*.tmp
+*.temp
+.cache
+tmp/
+temp/
+
+# Logs
+*.log
+logs/
+error_log
+access_log
+
+# Arquivos de backup
+*.bak
+*.backup
+*.old
+bkp/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependências locais
+node_modules/
+vendor/
+composer.lock
+
+# Arquivos de configuração locais
+.env.local
+.env.development
+config.local.php
+
+# Arquivos de teste
+test_*.php
+*_test.php
+tests/
+
+# Documentação
+*.md
+docs/
+wiki/
+
+# Arquivos grandes
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Screenshots e imagens grandes
+screenshot.png
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+
+# Arquivos de dados
+*.csv
+*.xlsx
+*.xls
+data/
+
+# =====================================================
+# FIM DO ARQUIVO .dockerignore
+# =====================================================

@@ -1,0 +1,85 @@
+# =====================================================
+# CONFINTER - Arquivo .gitignore
+# Arquivos e diretórios a serem ignorados pelo Git
+# Data: 06/09/2025
+# =====================================================
+
+# Arquivos de configuração sensíveis
+config.php
+php/conexao.php
+.env
+.env.local
+.env.production
+
+# Arquivos de log
+*.log
+logs/
+error_log
+access_log
+
+# Arquivos temporários
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Arquivos de backup
+*.bak
+*.backup
+*.old
+bkp/
+
+# Arquivos SQL (exceto esquemas)
+*.sql
+!sql/esquema_completo_confinter.sql
+!sql/README_ESQUEMA_COMPLETO.md
+
+# Diretórios de dependências
+vendor/
+node_modules/
+composer.lock
+
+# Diretórios de cache
+cache/
+tmp/
+temp/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de teste (se não quiser versionar)
+teste_*.php
+test_*.php
+
+# Diretórios de upload (conteúdo dinâmico)
+uploads/
+imagens/
+assets/uploads/
+
+# Arquivos de sessão PHP
+session_*
+
+# Arquivos de configuração do servidor
+.htaccess.backup
+nginx.conf.backup
+
+# Arquivos de desenvolvimento
+debug.log
+php_errors.log
+
+# Docker (opcional - se não quiser versionar)
+# docker-compose.override.yml
+# .env.docker
+
+# =====================================================
+# FIM DO ARQUIVO .gitignore
+# =====================================================

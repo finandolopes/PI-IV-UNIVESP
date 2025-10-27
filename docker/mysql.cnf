@@ -1,0 +1,88 @@
+# =====================================================
+# CONFINTER - Configuração MySQL para Docker
+# Arquivo mysql.cnf personalizado
+# Data: 06/09/2025
+# =====================================================
+
+[mysqld]
+# Configurações básicas
+bind-address = 0.0.0.0
+port = 3306
+socket = /var/run/mysqld/mysqld.sock
+
+# Configurações de performance
+innodb_buffer_pool_size = 128M
+innodb_log_file_size = 32M
+innodb_log_buffer_size = 8M
+innodb_flush_log_at_trx_commit = 1
+innodb_lock_wait_timeout = 50
+
+# Configurações de cache
+query_cache_size = 64M
+query_cache_type = ON
+query_cache_limit = 8M
+
+# Configurações de conexão
+max_connections = 100
+max_connect_errors = 100000
+connect_timeout = 60
+wait_timeout = 28800
+interactive_timeout = 28800
+
+# Configurações de segurança
+skip-name-resolve
+sql_mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+# Configurações de log
+general_log = 0
+general_log_file = /var/lib/mysql/mysql.log
+slow_query_log = 1
+slow_query_log_file = /var/lib/mysql/mysql-slow.log
+long_query_time = 2
+
+# Configurações de charset
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+init_connect = 'SET NAMES utf8mb4'
+
+# Configurações de InnoDB
+innodb_file_per_table = 1
+innodb_data_file_path = ibdata1:10M:autoextend
+innodb_autoextend_increment = 64
+
+# Configurações de MyISAM (se usado)
+key_buffer_size = 16M
+table_open_cache = 64
+
+# Configurações de tmp
+tmp_table_size = 32M
+max_heap_table_size = 32M
+
+# Configurações de binlog (para replicação)
+server-id = 1
+log_bin = /var/lib/mysql/mysql-bin
+binlog_format = ROW
+expire_logs_days = 7
+max_binlog_size = 100M
+
+# Configurações de SSL (opcional)
+# ssl-ca = /etc/mysql/ssl/ca.pem
+# ssl-cert = /etc/mysql/ssl/server-cert.pem
+# ssl-key = /etc/mysql/ssl/server-key.pem
+
+[mysql]
+# Configurações do cliente MySQL
+default-character-set = utf8mb4
+
+[mysqladmin]
+# Configurações do mysqladmin
+default-character-set = utf8mb4
+
+[mysqldump]
+# Configurações do mysqldump
+default-character-set = utf8mb4
+max_allowed_packet = 64M
+
+# =====================================================
+# FIM DO ARQUIVO mysql.cnf
+# =====================================================
