@@ -1,12 +1,17 @@
 <?php
 session_start();
-include_once('../php/conexao.php');
+// Caminho absoluto para o arquivo de conexão
+$conexao_path = dirname(__DIR__) . '/php/conexao.php';
+include_once($conexao_path);
 
 // Verificar se usuário está logado e é admin
 if (!isset($_SESSION['username'])) {
+    echo "<!-- DEBUG: User not logged in -->\n";
     header('Location: login.php');
     exit();
 }
+
+echo "<!-- DEBUG: User logged in as: " . $_SESSION['username'] . " -->\n";
 
 // Verificar se é admin
 $user_query = "SELECT perfil FROM adm WHERE usuario = ?";
@@ -17,10 +22,15 @@ $result = $stmt->get_result();
 $user_data = $result->fetch_assoc();
 $stmt->close();
 
+echo "<!-- DEBUG: User data: " . json_encode($user_data) . " -->\n";
+
 if (!$user_data || $user_data['perfil'] !== 'admin') {
+    echo "<!-- DEBUG: User is not admin -->\n";
     header('Location: ../index.php');
     exit;
 }
+
+echo "<!-- DEBUG: User validation passed -->\n";
 
 // Processar ações
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -138,6 +148,7 @@ $is_iframe = isset($_GET['iframe']) || (isset($_SERVER['HTTP_REFERER']) && strpo
 ?>
 
 <?php if (!$is_iframe): ?>
+<!-- Renderizando versão completa (não iframe) -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -537,6 +548,404 @@ window.addEventListener('load', function() {
     }, 100);
 });
 <?php endif; ?>
+</script>
+
+</body>
+</html>
+<?php else: ?>
+<!-- Renderizando versão iframe -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONFINTER - Gerenciar Reset de Senha</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+    <style>
+        .real-time-card {
+            transition: all 0.3s ease;
+        }
+        .real-time-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        body {
+            background-color: #f4f6f9;
+        }
+    </style>
+</head>
+<body>
+<div class="content-wrapper" style="margin-left: 0;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">
+                        <i class="fas fa-key mr-2"></i>
+                        Gerenciar Reset de Senha
+                    </h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
+                        <li class="breadcrumb-item active">Reset de Senha</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Statistics Cards -->
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning real-time-card">
+                        <div class="inner">
+                            <h3><?php echo number_format($pendentes); ?></h3>
+                            <p>Solicitações Pendentes</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <a href="#solicitacoesPendentes" class="small-box-footer">
+                            Ver Detalhes <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success real-time-card">
+                        <div class="inner">
+                            <h3><?php echo number_format($processados_hoje); ?></h3>
+                            <p>Processados Hoje</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="small-box-footer">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info real-time-card">
+                        <div class="inner">
+                            <h3><?php echo number_format($total_resets); ?></h3>
+                            <p>Total de Resets</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <div class="small-box-footer">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger real-time-card">
+                        <div class="inner">
+                            <h3><?php echo $tempo_medio ?: '00:00:00'; ?></h3>
+                            <p>Tempo Médio</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="small-box-footer">
+                            &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensagens -->
+            <?php if (isset($_SESSION['success'])): ?>
+                <div class="alert alert-success alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="fas fa-check-circle mr-2"></i><?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="fas fa-exclamation-triangle mr-2"></i><?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Solicitações Pendentes -->
+            <div class="card" id="solicitacoesPendentes">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-clock mr-1"></i>
+                        Solicitações Pendentes
+                    </h3>
+                    <div class="card-tools">
+                        <span class="badge badge-warning"><?php echo count($solicitacoes); ?> pendente(s)</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <?php if (empty($solicitacoes)): ?>
+                        <div class="text-center text-muted py-5">
+                            <i class="fas fa-check-circle fa-3x mb-3 text-success"></i>
+                            <h4>Nenhuma solicitação pendente</h4>
+                            <p>Todas as solicitações foram processadas.</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="table-responsive">
+                            <table id="tabelaPendentes" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Usuário</th>
+                                        <th>Email</th>
+                                        <th>Data Solicitação</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($solicitacoes as $solicitacao): ?>
+                                    <tr>
+                                        <td>
+                                            <strong><?php echo htmlspecialchars($solicitacao['nome_usuario'] ?? $solicitacao['usuario']); ?></strong><br>
+                                            <small class="text-muted"><?php echo htmlspecialchars($solicitacao['usuario']); ?></small>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($solicitacao['email']); ?></td>
+                                        <td><?php echo date('d/m/Y H:i', strtotime($solicitacao['data_solicitacao'])); ?></td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-success btn-sm" onclick="processarReset(<?php echo $solicitacao['id']; ?>, '<?php echo htmlspecialchars($solicitacao['nome_usuario'] ?? $solicitacao['usuario']); ?>')">
+                                                    <i class="fas fa-key"></i> Resetar
+                                                </button>
+                                                <button class="btn btn-danger btn-sm" onclick="cancelarSolicitacao(<?php echo $solicitacao['id']; ?>)">
+                                                    <i class="fas fa-times"></i> Cancelar
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Solicitações Processadas -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-history mr-1"></i>
+                        Histórico de Resets
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <?php if (empty($solicitacoes_processadas)): ?>
+                        <div class="text-center text-muted py-5">
+                            <i class="fas fa-history fa-3x mb-3 text-muted"></i>
+                            <h4>Nenhum reset processado</h4>
+                            <p>Ainda não foram realizados resets de senha.</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="table-responsive">
+                            <table id="tabelaProcessadas" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Usuário</th>
+                                        <th>Email</th>
+                                        <th>Data Solicitação</th>
+                                        <th>Data Processamento</th>
+                                        <th>Status</th>
+                                        <th>Nova Senha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($solicitacoes_processadas as $solicitacao): ?>
+                                    <tr>
+                                        <td>
+                                            <strong><?php echo htmlspecialchars($solicitacao['nome_usuario'] ?? $solicitacao['usuario']); ?></strong><br>
+                                            <small class="text-muted"><?php echo htmlspecialchars($solicitacao['usuario']); ?></small>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($solicitacao['email']); ?></td>
+                                        <td><?php echo date('d/m/Y H:i', strtotime($solicitacao['data_solicitacao'])); ?></td>
+                                        <td><?php echo $solicitacao['data_processamento'] ? date('d/m/Y H:i', strtotime($solicitacao['data_processamento'])) : '-'; ?></td>
+                                        <td>
+                                            <?php
+                                            $status_class = $solicitacao['status'] === 'processado' ? 'success' : 'danger';
+                                            $status_text = $solicitacao['status'] === 'processado' ? 'Processado' : 'Cancelado';
+                                            ?>
+                                            <span class="badge badge-<?php echo $status_class; ?>"><?php echo $status_text; ?></span>
+                                        </td>
+                                        <td>
+                                            <?php if ($solicitacao['status'] === 'processado' && $solicitacao['nova_senha']): ?>
+                                                <code class="bg-light px-2 py-1 rounded"><?php echo htmlspecialchars($solicitacao['nova_senha']); ?></code>
+                                            <?php else: ?>
+                                                -
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- Modal para Processar Reset -->
+<div class="modal fade" id="processarResetModal" tabindex="-1" role="dialog" aria-labelledby="processarResetModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="processarResetModalLabel">
+                    <i class="fas fa-key mr-2"></i>Resetar Senha
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="solicitacao_id" id="solicitacao_id">
+                    <input type="hidden" name="action" value="processar">
+                    <div class="form-group">
+                        <label for="usuario_info">
+                            <i class="fas fa-user mr-1"></i>Usuário:
+                        </label>
+                        <p class="mb-3"><strong id="usuario_nome"></strong></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="nova_senha">
+                            <i class="fas fa-lock mr-1"></i>Nova Senha:
+                        </label>
+                        <input type="password" class="form-control" id="nova_senha" name="nova_senha" required>
+                        <small class="form-text text-muted">
+                            <i class="fas fa-info-circle mr-1"></i>A senha será mostrada ao usuário após o reset.
+                        </small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-key mr-1"></i>Resetar Senha
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Cancelar Solicitação -->
+<div class="modal fade" id="cancelarModal" tabindex="-1" role="dialog" aria-labelledby="cancelarModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelarModalLabel">
+                    <i class="fas fa-exclamation-triangle mr-2 text-warning"></i>Cancelar Solicitação
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="solicitacao_id" id="cancelar_solicitacao_id">
+                    <input type="hidden" name="action" value="cancelar">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <strong>Atenção!</strong> Tem certeza que deseja cancelar esta solicitação de reset de senha?
+                        <br><small>Esta ação não pode ser desfeita.</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-arrow-left mr-1"></i>Não, voltar
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-times mr-1"></i>Sim, cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap4.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Initialize DataTables
+    $('#tabelaPendentes').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
+        }
+    });
+
+    $('#tabelaProcessadas').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
+        }
+    });
+});
+
+function processarReset(id, nome) {
+    document.getElementById('solicitacao_id').value = id;
+    document.getElementById('usuario_nome').textContent = nome;
+    $('#processarResetModal').modal('show');
+}
+
+function cancelarSolicitacao(id) {
+    document.getElementById('cancelar_solicitacao_id').value = id;
+    $('#cancelarModal').modal('show');
+}
+
+// Ajustar altura do iframe quando carregado
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        const height = document.body.scrollHeight;
+        if (window.parent) {
+            window.parent.postMessage({
+                type: 'resize-iframe',
+                height: height + 50
+            }, '*');
+        }
+    }, 100);
+});
 </script>
 
 </body>

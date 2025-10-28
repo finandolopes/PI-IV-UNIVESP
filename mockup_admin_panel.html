@@ -1281,69 +1281,291 @@
                         <div class="row mb-4">
                             <div class="col-12">
                                 <h2><i class="fas fa-search mr-2"></i>Buscar Clientes</h2>
-                                <p class="text-muted">Encontre e gerencie clientes cadastrados</p>
+                                <p class="text-muted">Encontre e gerencie clientes cadastrados com interface moderna de cards</p>
                             </div>
                         </div>
 
-                        <div class="card">
+                        <!-- Filtros -->
+                        <div class="card mb-4">
                             <div class="card-header">
-                                <h3 class="card-title">Filtros de Busca</h3>
+                                <h3 class="card-title"><i class="fas fa-filter"></i> Filtros de Busca</h3>
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="Nome do cliente">
+                                        <div class="form-group">
+                                            <label for="statusFilter">Status:</label>
+                                            <select class="form-control" id="statusFilter">
+                                                <option value="">Todos os Status</option>
+                                                <option value="ativo">Ativo</option>
+                                                <option value="inativo">Inativo</option>
+                                                <option value="pendente">Pendente</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <div class="form-group">
+                                            <label for="tipoFilter">Tipo:</label>
+                                            <select class="form-control" id="tipoFilter">
+                                                <option value="">Todos os Tipos</option>
+                                                <option value="pessoa_fisica">Pessoa Física</option>
+                                                <option value="pessoa_juridica">Pessoa Jurídica</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <button class="btn btn-primary btn-block">Buscar</button>
+                                        <div class="form-group">
+                                            <label for="searchInput">Buscar por nome:</label>
+                                            <input type="text" class="form-control" id="clienteSearchInput" placeholder="Digite o nome do cliente...">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card mt-3">
-                            <div class="card-header">
-                                <h3 class="card-title">Resultados da Busca</h3>
+                        <!-- Cards de Clientes -->
+                        <div class="row" id="clientesContainer">
+                            <!-- Card Empresa ABC Ltda -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="ativo" data-tipo="pessoa_juridica">
+                                <div class="card h-100 border-success">
+                                    <div class="card-header bg-success text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-building"></i> Empresa ABC Ltda</h6>
+                                            <span class="badge bg-light text-success">Ativo</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CNPJ:</strong> 12.345.678/0001-90</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Jurídica</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> João Silva</p>
+                                                <p class="mb-2"><strong>Email:</strong> contato@empresaabc.com</p>
+                                                <p class="mb-0"><strong>Telefone:</strong> (11) 99999-9999</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" onclick="showModal('clienteModal')">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm" onclick="showPage('clientes-editar')">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm" onclick="showNotification('Cliente excluído com sucesso!', 'success')">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Nome</th>
-                                                <th>Email</th>
-                                                <th>Telefone</th>
-                                                <th>Status</th>
-                                                <th>Ações</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>João Silva</td>
-                                                <td>joao@email.com</td>
-                                                <td>(11) 99999-9999</td>
-                                                <td><span class="badge bg-success">Ativo</span></td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-primary" onclick="showPage('clientes-editar')">Editar</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Maria Santos</td>
-                                                <td>maria@email.com</td>
-                                                <td>(11) 88888-8888</td>
-                                                <td><span class="badge bg-success">Ativo</span></td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-primary" onclick="showPage('clientes-editar')">Editar</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+
+                            <!-- Card Maria Santos -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="inativo" data-tipo="pessoa_fisica">
+                                <div class="card h-100 border-secondary">
+                                    <div class="card-header bg-secondary text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-user"></i> Maria Santos</h6>
+                                            <span class="badge bg-light text-secondary">Inativo</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CPF:</strong> 123.456.789-00</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Física</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> Maria Santos</p>
+                                                <p class="mb-2"><strong>Email:</strong> maria.santos@email.com</p>
+                                                <p class="mb-0"><strong>Telefone:</strong> (11) 88888-8888</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" onclick="showModal('clienteModal')">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm" onclick="showPage('clientes-editar')">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm" onclick="showNotification('Cliente excluído com sucesso!', 'success')">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Startup XYZ -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="pendente" data-tipo="pessoa_juridica">
+                                <div class="card h-100 border-warning">
+                                    <div class="card-header bg-warning text-dark">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-clock"></i> Startup XYZ</h6>
+                                            <span class="badge bg-light text-warning">Pendente</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CNPJ:</strong> 98.765.432/0001-10</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Jurídica</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> Ana Costa</p>
+                                                <p class="mb-2"><strong>Email:</strong> ana@startupxyz.com</p>
+                                                <p class="mb-0"><strong>Telefone:</strong> (11) 77777-7777</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" onclick="showModal('clienteModal')">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm" onclick="showPage('clientes-editar')">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm" onclick="showNotification('Cliente excluído com sucesso!', 'success')">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Pedro Oliveira -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="ativo" data-tipo="pessoa_fisica">
+                                <div class="card h-100 border-success">
+                                    <div class="card-header bg-success text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-user"></i> Pedro Oliveira</h6>
+                                            <span class="badge bg-light text-success">Ativo</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CPF:</strong> 456.789.123-00</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Física</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> Pedro Oliveira</p>
+                                                <p class="mb-2"><strong>Email:</strong> pedro.oliveira@email.com</p>
+                                                <p class="mb-0"><strong>Telefone:</strong> (11) 66666-6666</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" onclick="showModal('clienteModal')">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm" onclick="showPage('clientes-editar')">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm" onclick="showNotification('Cliente excluído com sucesso!', 'success')">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Tech Solutions -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="ativo" data-tipo="pessoa_juridica">
+                                <div class="card h-100 border-success">
+                                    <div class="card-header bg-success text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-building"></i> Tech Solutions Ltda</h6>
+                                            <span class="badge bg-light text-success">Ativo</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CNPJ:</strong> 55.444.333/0001-22</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Jurídica</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> Carlos Mendes</p>
+                                                <p class="mb-2"><strong>Email:</strong> carlos@techsolutions.com</p>
+                                                <p class="mb-0"><strong>Telefone:</strong> (11) 55555-5555</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" onclick="showModal('clienteModal')">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm" onclick="showPage('clientes-editar')">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm" onclick="showNotification('Cliente excluído com sucesso!', 'success')">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Ana Pereira -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="pendente" data-tipo="pessoa_fisica">
+                                <div class="card h-100 border-warning">
+                                    <div class="card-header bg-warning text-dark">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-clock"></i> Ana Pereira</h6>
+                                            <span class="badge bg-light text-warning">Pendente</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CPF:</strong> 789.123.456-00</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Física</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> Ana Pereira</p>
+                                                <p class="mb-2"><strong>Email:</strong> ana.pereira@email.com</p>
+                                                <p class="mb-0"><strong>Telefone:</strong> (11) 44444-4444</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" onclick="showModal('clienteModal')">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm" onclick="showPage('clientes-editar')">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm" onclick="showNotification('Cliente excluído com sucesso!', 'success')">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Estatísticas dos Filtros -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row text-center">
+                                            <div class="col-md-3">
+                                                <h4 class="text-success">4</h4>
+                                                <small class="text-muted">Clientes Ativos</small>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h4 class="text-secondary">1</h4>
+                                                <small class="text-muted">Clientes Inativos</small>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h4 class="text-warning">2</h4>
+                                                <small class="text-muted">Clientes Pendentes</small>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h4 class="text-primary">7</h4>
+                                                <small class="text-muted">Total de Clientes</small>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1787,58 +2009,83 @@
         </div>
     </div>
 
-    <div class="modal fade" id="view-request-modal" tabindex="-1">
-        <div class="modal-dialog modal-xl">
+    <div class="modal fade" id="clienteModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Detalhes da Requisição #001</h5>
+                    <h5 class="modal-title"><i class="fas fa-eye"></i> Detalhes do Cliente</h5>
                     <button type="button" class="close" data-dismiss="modal">
                         <span>&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-6">
-                            <h6>Dados do Cliente</h6>
-                            <table class="table table-sm">
-                                <tr><th>Nome:</th><td>João Silva</td></tr>
-                                <tr><th>CPF:</th><td>123.456.789-00</td></tr>
-                                <tr><th>Email:</th><td>joao@email.com</td></tr>
-                                <tr><th>Telefone:</th><td>(11) 99999-9999</td></tr>
-                            </table>
+                        <div class="col-md-4 text-center">
+                            <img src="https://via.placeholder.com/120x120/007bff/ffffff?text=C" class="rounded-circle mb-3" alt="Avatar">
+                            <h5>Empresa ABC Ltda</h5>
+                            <span class="badge badge-success">Ativo</span>
                         </div>
-                        <div class="col-md-6">
-                            <h6>Dados da Requisição</h6>
-                            <table class="table table-sm">
-                                <tr><th>Valor Solicitado:</th><td>R$ 50.000,00</td></tr>
-                                <tr><th>Tipo:</th><td>Crédito Pessoal</td></tr>
-                                <tr><th>Prazo:</th><td>24 meses</td></tr>
-                                <tr><th>Data:</th><td>15/10/2025</td></tr>
-                                <tr><th>Status:</th><td><span class="badge badge-warning">Pendente</span></td></tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <h6>Documentos Anexados</h6>
-                            <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between">
-                                    RG.pdf <button class="btn btn-sm btn-info">Visualizar</button>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    CPF.pdf <button class="btn btn-sm btn-info">Visualizar</button>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Comprovante de Renda.pdf <button class="btn btn-sm btn-info">Visualizar</button>
-                                </li>
-                            </ul>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6><i class="fas fa-building"></i> Informações Gerais</h6>
+                                    <table class="table table-sm table-borderless">
+                                        <tr><th>Razão Social:</th><td>Empresa ABC Ltda</td></tr>
+                                        <tr><th>CNPJ:</th><td>12.345.678/0001-90</td></tr>
+                                        <tr><th>Tipo:</th><td>Pessoa Jurídica</td></tr>
+                                        <tr><th>Status:</th><td><span class="badge badge-success">Ativo</span></td></tr>
+                                        <tr><th>Data Cadastro:</th><td>15/09/2025</td></tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6><i class="fas fa-user"></i> Contato</h6>
+                                    <table class="table table-sm table-borderless">
+                                        <tr><th>Responsável:</th><td>João Silva</td></tr>
+                                        <tr><th>Email:</th><td>contato@empresaabc.com</td></tr>
+                                        <tr><th>Telefone:</th><td>(11) 99999-9999</td></tr>
+                                        <tr><th>Endereço:</th><td>Av. Paulista, 1000</td></tr>
+                                        <tr><th>Cidade:</th><td>São Paulo - SP</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <h6><i class="fas fa-chart-line"></i> Estatísticas</h6>
+                                    <div class="row text-center">
+                                        <div class="col-3">
+                                            <div class="border rounded p-2">
+                                                <h6 class="text-primary">12</h6>
+                                                <small>Requisições</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="border rounded p-2">
+                                                <h6 class="text-success">R$ 450.000</h6>
+                                                <small>Valor Total</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="border rounded p-2">
+                                                <h6 class="text-warning">8</h6>
+                                                <small>Aprovadas</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="border rounded p-2">
+                                                <h6 class="text-info">4</h6>
+                                                <small>Pendentes</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-success" onclick="showNotification('Requisição aprovada!', 'success')">Aprovar</button>
-                    <button type="button" class="btn btn-danger" onclick="showNotification('Requisição reprovada!', 'error')">Reprovar</button>
+                    <button type="button" class="btn btn-primary" onclick="showPage('clientes-editar')">Editar Cliente</button>
+                    <button type="button" class="btn btn-success">Nova Requisição</button>
                 </div>
             </div>
         </div>
@@ -1864,6 +2111,7 @@
             updateLastUpdate();
             initializeDataTables();
             initializeFileUpload();
+            initializeClientFilters();
             initializeCharts();
         });
 
@@ -1978,6 +2226,100 @@
                                 preview.appendChild(div);
                             };
                             reader.readAsDataURL(file);
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize client filters
+        function initializeClientFilters() {
+            const statusFilter = document.getElementById('statusFilter');
+            const tipoFilter = document.getElementById('tipoFilter');
+            const searchInput = document.getElementById('clienteSearchInput');
+            const clientesContainer = document.getElementById('clientesContainer');
+
+            function filterClientes() {
+                const statusValue = statusFilter ? statusFilter.value.toLowerCase() : '';
+                const tipoValue = tipoFilter ? tipoFilter.value.toLowerCase() : '';
+                const searchValue = searchInput ? searchInput.value.toLowerCase() : '';
+
+                const cards = clientesContainer ? clientesContainer.querySelectorAll('.cliente-card') : [];
+
+                cards.forEach(card => {
+                    const cardStatus = card.dataset.status.toLowerCase();
+                    const cardTipo = card.dataset.tipo.toLowerCase();
+                    const cardTitle = card.querySelector('.card-title').textContent.toLowerCase();
+
+                    const statusMatch = !statusValue || cardStatus === statusValue;
+                    const tipoMatch = !tipoValue || cardTipo === tipoValue;
+                    const searchMatch = !searchValue || cardTitle.includes(searchValue);
+
+                    if (statusMatch && tipoMatch && searchMatch) {
+                        card.style.display = 'block';
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    } else {
+                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                    }
+                });
+
+                // Update statistics
+                updateClientStatistics();
+            }
+
+            function updateClientStatistics() {
+                const cards = clientesContainer ? clientesContainer.querySelectorAll('.cliente-card') : [];
+                let ativos = 0, inativos = 0, pendentes = 0, total = 0;
+
+                cards.forEach(card => {
+                    if (card.style.display !== 'none') {
+                        total++;
+                        const status = card.dataset.status.toLowerCase();
+                        if (status === 'ativo') ativos++;
+                        else if (status === 'inativo') inativos++;
+                        else if (status === 'pendente') pendentes++;
+                    }
+                });
+
+                // Update stats display (you can add these elements to the HTML)
+                const statsElements = {
+                    ativos: document.querySelector('.text-success h4'),
+                    inativos: document.querySelector('.text-secondary h4'),
+                    pendentes: document.querySelector('.text-warning h4'),
+                    total: document.querySelector('.text-primary h4')
+                };
+
+                if (statsElements.ativos) statsElements.ativos.textContent = ativos;
+                if (statsElements.inativos) statsElements.inativos.textContent = inativos;
+                if (statsElements.pendentes) statsElements.pendentes.textContent = pendentes;
+                if (statsElements.total) statsElements.total.textContent = total;
+            }
+
+            if (statusFilter) statusFilter.addEventListener('change', filterClientes);
+            if (tipoFilter) tipoFilter.addEventListener('change', filterClientes);
+            if (searchInput) searchInput.addEventListener('input', filterClientes);
+
+            // Hover effects for client cards
+            if (clientesContainer) {
+                clientesContainer.addEventListener('mouseover', function(e) {
+                    if (e.target.closest('.cliente-card')) {
+                        const card = e.target.closest('.cliente-card');
+                        if (card.style.display !== 'none') {
+                            card.style.transform = 'translateY(-5px)';
+                            card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                        }
+                    }
+                });
+
+                clientesContainer.addEventListener('mouseout', function(e) {
+                    if (e.target.closest('.cliente-card')) {
+                        const card = e.target.closest('.cliente-card');
+                        if (card.style.display !== 'none') {
+                            card.style.transform = 'translateY(0)';
+                            card.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
                         }
                     }
                 });

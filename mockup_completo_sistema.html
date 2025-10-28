@@ -20,6 +20,13 @@
         .timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: #007bff; }
         .timeline-item { position: relative; margin-bottom: 20px; }
         .timeline-item::before { content: ''; position: absolute; left: -22px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: #007bff; }
+        .cliente-card { transition: all 0.3s ease; cursor: pointer; }
+        .cliente-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .cliente-card .card-header { transition: all 0.3s ease; }
+        .cliente-card:hover .card-header { opacity: 0.9; }
+        .cliente-card .btn-group .btn { transition: all 0.2s ease; }
+        .cliente-card .btn-group .btn:hover { transform: scale(1.05); }
+
     </style>
 </head>
 <body>
@@ -31,7 +38,7 @@
             <div class="col-md-8">
                 <h1><i class="fas fa-chart-line"></i> CONFINTER - Sistema Completo</h1>
                 <p class="mb-0">Sistema de Análise de Dados e Gestão para Correspondente Bancário</p>
-                <small>Versão 2.0.0 | Atualizado em Setembro 2025</small>
+                <small>Versão 2.1.0 | Atualizado em Setembro 2025</small>
             </div>
             <div class="col-md-4 text-end">
                 <div class="d-flex flex-wrap justify-content-end gap-1">
@@ -351,6 +358,28 @@
                 </div>
             </div>
 
+            <!-- Buscar Empresas -->
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card feature-card h-100">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="card-title"><i class="fas fa-search"></i> Buscar Empresas</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Layout de cards moderno</li>
+                            <li><i class="fas fa-check text-success"></i> Filtros dinâmicos (Status/Tipo)</li>
+                            <li><i class="fas fa-check text-success"></i> Modal de visualização</li>
+                            <li><i class="fas fa-check text-success"></i> Hover effects e animações</li>
+                            <li><i class="fas fa-check text-success"></i> Design responsivo</li>
+                        </ul>
+                        <div class="code-preview mt-3">
+<small><strong>Arquivo:</strong> buscar_empresa.php</small><br>
+<small><strong>Estilo:</strong> Cards com bordas coloridas, filtros JS</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Depoimentos -->
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card feature-card h-100">
@@ -441,6 +470,188 @@
         </div>
     </section>
 
+    <!-- Preview Visual - Buscar Empresas -->
+    <section class="mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card feature-card">
+                    <div class="card-header bg-info text-white">
+                        <h3 class="card-title"><i class="fas fa-eye"></i> Preview Visual - Buscar Empresas</h3>
+                        <small>Interface moderna com layout de cards e filtros dinâmicos</small>
+                    </div>
+                    <div class="card-body">
+                        <!-- Filtros -->
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-filter"></i> Filtrar por Status:</label>
+                                <select class="form-select" id="statusFilter">
+                                    <option value="">Todos os Status</option>
+                                    <option value="ativo">Ativo</option>
+                                    <option value="inativo">Inativo</option>
+                                    <option value="pendente">Pendente</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label"><i class="fas fa-building"></i> Filtrar por Tipo:</label>
+                                <select class="form-select" id="tipoFilter">
+                                    <option value="">Todos os Tipos</option>
+                                    <option value="pessoa_fisica">Pessoa Física</option>
+                                    <option value="pessoa_juridica">Pessoa Jurídica</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Cards de Exemplo -->
+                        <div class="row" id="clientesContainer">
+                            <!-- Card Ativo -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="ativo" data-tipo="pessoa_juridica">
+                                <div class="card h-100 border-success">
+                                    <div class="card-header bg-success text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-building"></i> Empresa ABC Ltda</h6>
+                                            <span class="badge bg-light text-success">Ativo</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CNPJ:</strong> 12.345.678/0001-90</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Jurídica</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> João Silva</p>
+                                                <p class="mb-0"><strong>Email:</strong> contato@empresaabc.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#visualizarModal">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Inativo -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="inativo" data-tipo="pessoa_fisica">
+                                <div class="card h-100 border-secondary">
+                                    <div class="card-header bg-secondary text-white">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-user"></i> Maria Santos</h6>
+                                            <span class="badge bg-light text-secondary">Inativo</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CPF:</strong> 123.456.789-00</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Física</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> Maria Santos</p>
+                                                <p class="mb-0"><strong>Email:</strong> maria.santos@email.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#visualizarModal">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Pendente -->
+                            <div class="col-md-6 col-lg-4 mb-4 cliente-card" data-status="pendente" data-tipo="pessoa_juridica">
+                                <div class="card h-100 border-warning">
+                                    <div class="card-header bg-warning text-dark">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title mb-0"><i class="fas fa-clock"></i> Startup XYZ</h6>
+                                            <span class="badge bg-light text-warning">Pendente</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="mb-2"><strong>CNPJ:</strong> 98.765.432/0001-10</p>
+                                                <p class="mb-2"><strong>Tipo:</strong> Pessoa Jurídica</p>
+                                                <p class="mb-2"><strong>Responsável:</strong> Ana Costa</p>
+                                                <p class="mb-0"><strong>Email:</strong> ana@startupxyz.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="btn-group w-100" role="group">
+                                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#visualizarModal">
+                                                <i class="fas fa-eye"></i> Visualizar
+                                            </button>
+                                            <button class="btn btn-outline-warning btn-sm">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-trash"></i> Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal de Visualização -->
+                        <div class="modal fade" id="visualizarModal" tabindex="-1">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"><i class="fas fa-eye"></i> Detalhes do Cliente</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6><i class="fas fa-building"></i> Informações Gerais</h6>
+                                                <p><strong>Razão Social:</strong> Empresa ABC Ltda</p>
+                                                <p><strong>CNPJ:</strong> 12.345.678/0001-90</p>
+                                                <p><strong>Tipo:</strong> Pessoa Jurídica</p>
+                                                <p><strong>Status:</strong> <span class="badge bg-success">Ativo</span></p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6><i class="fas fa-user"></i> Contato</h6>
+                                                <p><strong>Responsável:</strong> João Silva</p>
+                                                <p><strong>Email:</strong> contato@empresaabc.com</p>
+                                                <p><strong>Telefone:</strong> (11) 99999-9999</p>
+                                                <p><strong>Data Cadastro:</strong> 15/09/2025</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="button" class="btn btn-primary">Editar Cliente</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-4">
+                            <small><i class="fas fa-info-circle"></i> <strong>Funcionalidades Demonstradas:</strong> Layout responsivo de cards, filtros dinâmicos por status e tipo, hover effects, modal de visualização detalhada, botões de ação agrupados, e design consistente com AdminLTE.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Timeline de Desenvolvimento -->
     <section class="mb-5">
         <div class="row">
@@ -465,6 +676,11 @@
                                 <h5><i class="fas fa-users-cog"></i> Setembro 2025 - Sistema Administrativo Completo</h5>
                                 <p>Implementação completa do painel administrativo com todas as funcionalidades.</p>
                                 <small class="text-muted">✓ Gestão usuários, depoimentos, relatórios, reset senha, backup</small>
+                            </div>
+                            <div class="timeline-item">
+                                <h5><i class="fas fa-palette"></i> Setembro 2025 - Interface Moderna de Busca</h5>
+                                <p>Conversão da página "Buscar Empresas" para layout moderno de cards com filtros dinâmicos.</p>
+                                <small class="text-muted">✓ Cards responsivos, filtros JS, modal de visualização, hover effects</small>
                             </div>
                             <div class="timeline-item">
                                 <h5><i class="fas fa-shield-alt"></i> Setembro 2025 - Segurança e Otimização</h5>
@@ -702,6 +918,56 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 y: { beginAtZero: true }
             }
+        }
+    });
+
+    // Filtros da Buscar Empresas (Demo)
+    const statusFilter = document.getElementById('statusFilter');
+    const tipoFilter = document.getElementById('tipoFilter');
+    const clientesContainer = document.getElementById('clientesContainer');
+
+    function filterClientes() {
+        const statusValue = statusFilter.value.toLowerCase();
+        const tipoValue = tipoFilter.value.toLowerCase();
+
+        const cards = clientesContainer.querySelectorAll('.cliente-card');
+
+        cards.forEach(card => {
+            const cardStatus = card.dataset.status.toLowerCase();
+            const cardTipo = card.dataset.tipo.toLowerCase();
+
+            const statusMatch = !statusValue || cardStatus === statusValue;
+            const tipoMatch = !tipoValue || cardTipo === tipoValue;
+
+            if (statusMatch && tipoMatch) {
+                card.style.display = 'block';
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            } else {
+                card.style.display = 'none';
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+            }
+        });
+    }
+
+    statusFilter.addEventListener('change', filterClientes);
+    tipoFilter.addEventListener('change', filterClientes);
+
+    // Hover effects para os cards
+    clientesContainer.addEventListener('mouseover', function(e) {
+        if (e.target.closest('.cliente-card')) {
+            const card = e.target.closest('.cliente-card');
+            card.style.transform = 'translateY(-5px)';
+            card.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+        }
+    });
+
+    clientesContainer.addEventListener('mouseout', function(e) {
+        if (e.target.closest('.cliente-card')) {
+            const card = e.target.closest('.cliente-card');
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
         }
     });
 });

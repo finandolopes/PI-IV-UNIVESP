@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $filepath = $backup_dir . $filename;
 
         // Comando mysqldump
-        $command = "mysqldump --user={$user} --password={$pass} --host={$host} {$dbname} > {$filepath}";
+        $command = "mysqldump --user={$username} --password={$password} --host={$host} {$dbname} > {$filepath}";
         exec($command, $output, $return_var);
 
         if ($return_var === 0) {
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $backup_file = $_FILES['backup_file']['tmp_name'];
 
             // Comando mysql para restaurar
-            $command = "mysql --user={$user} --password={$pass} --host={$host} {$dbname} < {$backup_file}";
+            $command = "mysql --user={$username} --password={$password} --host={$host} {$dbname} < {$backup_file}";
             exec($command, $output, $return_var);
 
             if ($return_var === 0) {

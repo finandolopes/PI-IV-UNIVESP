@@ -408,93 +408,6 @@ if (!$is_iframe) {
 
 <?php include 'footer.php'; ?>
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    // Inicializar DataTable com configuração mais robusta
-    $('#requisicoesTable').DataTable({
-        'language': {
-            'url': '//cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json'
-        },
-        'pageLength': 25,
-        'responsive': true,
-        'order': [[0, 'desc']],
-        'columnDefs': [
-            {
-                'orderable': false,
-                'targets': [7] // Coluna de Ações (0-indexed)
-            }
-        ],
-        'initComplete': function() {
-            console.log('DataTable initialized successfully');
-        }
-    });
-
-    // Auto-hide alerts
-    setTimeout(function() {
-        $('.alert').fadeOut('slow');
-    }, 5000);
-});
-
-function verDetalhes(id) {
-    $('#modalContent').html('<div class="text-center"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Carregando...</p></div>');
-    $('#modalDetalhes').modal('show');
-
-    $.get('ver_requisicao.php?id=' + id<?php echo $is_iframe ? " + '&iframe=1'" : ""; ?>)
-        .done(function(data) {
-            $('#modalContent').html(data);
-        })
-        .fail(function() {
-            $('#modalContent').html('<div class="alert alert-danger">Erro ao carregar detalhes.</div>');
-        });
-}
-
-function aprovarRequisicao(id) {
-    if (confirm('Tem certeza que deseja APROVAR esta requisição?')) {
-        const form = $('<form method="post" action="<?php echo $_SERVER['PHP_SELF'] . ($is_iframe ? '?iframe=1' : ''); ?>"><input type="hidden" name="action" value="approve"><input type="hidden" name="request_id" value="' + id + '"></form>');
-        $('body').append(form);
-        form.submit();
-    }
-}
-
-function rejeitarRequisicao(id) {
-    if (confirm('Tem certeza que deseja REJEITAR esta requisição?')) {
-        const form = $('<form method="post" action="<?php echo $_SERVER['PHP_SELF'] . ($is_iframe ? '?iframe=1' : ''); ?>"><input type="hidden" name="action" value="reject"><input type="hidden" name="request_id" value="' + id + '"></form>');
-        $('body').append(form);
-        form.submit();
-    }
-}
-
-function editarStatus(id) {
-    $('#status_request_id').val(id);
-    $('#modalStatus').modal('show');
-}
-
-// Ajustar altura do iframe quando carregado
-<?php if ($is_iframe): ?>
-window.addEventListener('load', function() {
-    setTimeout(function() {
-        const height = document.body.scrollHeight;
-        if (window.parent) {
-            window.parent.postMessage({
-                type: 'resize-iframe',
-                height: height + 50
-            }, '*');
-        }
-    }, 100);
-});
-<?php endif; ?>
-</script>
-
-</div>
-</body>
-</html>
 <?php } else { ?>
 <!-- Versão Iframe -->
 <!DOCTYPE html>
@@ -1010,8 +923,6 @@ window.addEventListener('load', function() {
     }, 100);
 });
 </script>
-</body>
-</html>
 <?php } ?>
 
 <?php

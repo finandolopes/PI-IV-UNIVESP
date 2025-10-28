@@ -4,35 +4,62 @@ session_start();
 include_once('conexao.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = mysqli_real_escape_string($conexao, $_POST['email']);
+    $email = trim($_POST['email'] ?? '');
 
-    // Verificar se o email existe na tabela usuarios
-    $query = "SELECT id, nome, usuario FROM usuarios WHERE email = '$email'";
-    $result = mysqli_query($conexao, $query);
-
-    if (mysqli_num_rows($result) > 0) {
-        $usuario = mysqli_fetch_assoc($result);
-
-        // Inserir solicitação na tabela reset_senha_solicitacoes
-        $insert_query = "INSERT INTO reset_senha_solicitacoes (usuario_id, email, nome_usuario, status)
-                        VALUES ('{$usuario['id']}', '$email', '{$usuario['nome']}', 'pendente')";
-
-        if (mysqli_query($conexao, $insert_query)) {
-            $_SESSION['reset_success'] = "Solicitação de reset de senha encaminhada para o administrador! Você será notificado quando for processada.";
-            header('Location: ../index.php?reset=success');
-            exit();
-        } else {
-            $_SESSION['reset_error'] = "Erro ao processar solicitação. Tente novamente.";
-            header('Location: ../index.php?reset=error');
-            exit();
-        }
-    } else {
-        $_SESSION['reset_error'] = "Email não encontrado em nossa base de dados.";
-        header('Location: ../index.php?reset=error');
+    if (empty($email)) {
+        $_SESSION['reset_error'] = 'Por favor, digite seu email.';
+        header('Location: ../index.php');
         exit();
     }
-} else {
-    header('Location: ../index.php');
-    exit();
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['reset_error'] = 'Por favor, digite um email válido.';
+        header('Location: ../index.php');
+        exit();
+    }
+
+    // Verificar se o email existe na tabela adm
+    $query = "SELECT id_usuario, nome, usuario FROM adm WHERE email = ?";
+    $stmt = $conexao->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user_data = $result->fetch_assoc();
+
+        // Verificar se já existe uma solicitação pendente
+        $check_query = "SELECT id FROM reset_senha_solicitacoes WHERE usuario_id = ? AND status = 'pendente'";
+        $check_stmt = $conexao->prepare($check_query);
+        $check_stmt->bind_param("i", $user_data['id_usuario']);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result();
+
+        if ($check_result->num_rows > 0) {
+            $_SESSION['reset_error'] = 'Você já possui uma solicitação de reset pendente. Aguarde o processamento pelo administrador.';
+        } else {
+            // Inserir solicitação de reset
+            $insert_query = "INSERT INTO reset_senha_solicitacoes (usuario_id, nome_usuario, usuario, email, motivo) VALUES (?, ?, ?, ?, ?)";
+            $insert_stmt = $conexao->prepare($insert_query);
+            $motivo = 'Solicitação via modal do site - esqueceu senha';
+            $insert_stmt->bind_param("issss", $user_data['id_usuario'], $user_data['nome'], $user_data['usuario'], $email, $motivo);
+
+            if ($insert_stmt->execute()) {
+                $_SESSION['reset_success'] = 'Solicitação de reset de senha enviada com sucesso! O administrador será notificado e entrará em contato em breve.';
+            } else {
+                $_SESSION['reset_error'] = 'Erro ao processar solicitação. Tente novamente.';
+            }
+            $insert_stmt->close();
+        }
+        $check_stmt->close();
+    } else {
+        $_SESSION['reset_error'] = 'Email não encontrado em nossa base de dados.';
+    }
+
+    $stmt->close();
+    $conexao->close();
 }
+
+header('Location: ../index.php');
+exit();
 ?>

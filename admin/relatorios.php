@@ -56,60 +56,11 @@ while ($row = mysqli_fetch_assoc($result_req_categoria)) {
 }
 
 if (!$is_iframe) {
+    // Versão completa com navbar e sidebar
+    include 'navbar.php';
+    include 'sidebar.php';
 ?>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONFINTER - Relatórios e Estatísticas</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-    <!-- Custom Admin CSS -->
-    <link rel="stylesheet" href="assets/css/custom-admin.css">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .chart-container { position: relative; height: 400px; width: 100%; }
-    </style>
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-<?php include 'navbar.php'; ?>
-<?php include 'sidebar.php'; ?>
-
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">
-                        <i class="fas fa-chart-bar mr-2"></i>
-                        Relatórios e Estatísticas
-                    </h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="admin.php">Home</a></li>
-                        <li class="breadcrumb-item active">Relatórios</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <!-- Export Buttons -->
@@ -306,170 +257,116 @@ if (!$is_iframe) {
 
 <?php include 'footer.php'; ?>
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Visits Chart
-            var visitsCtx = document.getElementById('visitsChart').getContext('2d');
-            var visitsChart = new Chart(visitsCtx, {
-                type: 'line',
-                data: {
-                    labels: [<?php echo implode(', ', $visitas_labels); ?>],
-                    datasets: [{
-                        label: 'Visitas',
-                        data: [<?php echo implode(', ', $visitas_data); ?>],
-                        borderColor: 'rgb(75, 192, 192)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        tension: 0.1,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        }
-                    },
-                }
-            });
-
-            // Requests Chart
-            var reqCtx = document.getElementById('requestsChart').getContext('2d');
-            var reqChart = new Chart(reqCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: [<?php echo implode(', ', $req_labels); ?>],
-                    datasets: [{
-                        data: [<?php echo implode(', ', $req_data); ?>],
-                        backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)',
-                            'rgb(75, 192, 192)',
-                            'rgb(153, 102, 255)',
-                            'rgb(255, 159, 64)'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                        }
-                    }
-                }
-            });
-        });
-
-        // Export functions
-        function exportToExcel() {
-            var table = document.createElement('table');
-            var thead = document.createElement('thead');
-            var tbody = document.createElement('tbody');
-
-            var headerRow = document.createElement('tr');
-            var headers = ['Métrica', 'Valor'];
-            headers.forEach(function(header) {
-                var th = document.createElement('th');
-                th.textContent = header;
-                headerRow.appendChild(th);
-            });
-            thead.appendChild(headerRow);
-
-            var data = [
-                ['Tempo Médio de Acesso', '<?php echo $tempo_medio; ?>'],
-                ['Usuários Ativos', '<?php echo number_format($total_usuarios_ativos); ?>'],
-                ['Total de Visitas (30 dias)', '<?php echo array_sum($visitas_data); ?>'],
-                ['Total de Requisições', '<?php echo $total_req; ?>']
-            ];
-
-            data.forEach(function(rowData) {
-                var row = document.createElement('tr');
-                rowData.forEach(function(cellData) {
-                    var td = document.createElement('td');
-                    td.textContent = cellData;
-                    row.appendChild(td);
-                });
-                tbody.appendChild(row);
-            });
-
-            table.appendChild(thead);
-            table.appendChild(tbody);
-
-            var html = table.outerHTML;
-            var blob = new Blob([html], { type: 'application/vnd.ms-excel' });
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = 'relatorio_' + new Date().toISOString().split('T')[0] + '.xls';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        function exportToPDF() {
-            alert('Funcionalidade de export para PDF será implementada em breve.');
-        }
-
-        function exportToCSV() {
-            var csvContent = 'Métrica,Valor\n';
-            csvContent += 'Tempo Médio de Acesso,<?php echo $tempo_medio; ?>\n';
-            csvContent += 'Usuários Ativos,<?php echo number_format($total_usuarios_ativos); ?>\n';
-            csvContent += 'Total de Visitas (30 dias),<?php echo array_sum($visitas_data); ?>\n';
-            csvContent += 'Total de Requisições,<?php echo $total_req; ?>\n';
-
-            var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = 'relatorio_' + new Date().toISOString().split('T')[0] + '.csv';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-    </script>
-</body>
-</html>
 <?php } else { ?>
 <!-- Versão Iframe -->
-<div class="content-wrapper">
-    <!-- Content Header -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">
-                        <i class="fas fa-chart-bar mr-2"></i>
-                        Relatórios e Estatísticas
-                    </h1>
-                </div>
-                <div class="col-sm-6">
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-outline-primary btn-sm" onclick="exportToExcel()">
-                            <i class="fas fa-file-excel"></i> Excel
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm" onclick="exportToPDF()">
-                            <i class="fas fa-file-pdf"></i> PDF
-                        </button>
-                        <button class="btn btn-outline-success btn-sm" onclick="exportToCSV()">
-                            <i class="fas fa-file-csv"></i> CSV
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang='pt-BR'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Relatórios e Estatísticas - CONFINTER</title>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background: #f4f6f9; margin: 0; padding: 20px; }
+        .content-wrapper { margin: 0; background: transparent; }
+        .card { box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2); }
+        .chart-container { position: relative; height: 400px; width: 100%; }
 
-    <!-- Main content -->
+        /* Estilos específicos para relatórios */
+        .relatorio-card {
+            transition: all 0.3s ease;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .relatorio-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+            margin: 0 1px;
+        }
+
+        .btn-group .btn:first-child {
+            margin-left: 0;
+        }
+
+        .btn-group .btn:last-child {
+            margin-right: 0;
+        }
+
+        /* Melhorar responsividade */
+        @media (max-width: 768px) {
+            .relatorio-card .card-header {
+                flex-direction: column;
+                align-items: flex-start !important;
+                gap: 0.5rem;
+            }
+
+            .relatorio-card .card-header .badge {
+                align-self: flex-end;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn-group .btn {
+                margin: 1px 0;
+            }
+        }
+
+        /* Loading states */
+        .btn.loading {
+            opacity: 0.7;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            top: 50%;
+            left: 50%;
+            margin-left: -0.5rem;
+            margin-top: -0.5rem;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Alertas customizados */
+        .alert-fixed {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+<div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
             <!-- Statistics Cards -->
@@ -645,6 +542,8 @@ if (!$is_iframe) {
     </section>
 </div>
 
+<?php } ?>
+
 <script>
 $(document).ready(function() {
     // Visits Chart
@@ -772,7 +671,6 @@ function exportToCSV() {
     URL.revokeObjectURL(url);
 }
 </script>
-<?php } ?>
 
 <?php
 mysqli_close($conexao);

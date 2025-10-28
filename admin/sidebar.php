@@ -33,6 +33,13 @@ if (isset($conexao)) {
         $row = mysqli_fetch_assoc($users_result);
         $sidebar_stats['total_users'] = $row ? $row['total'] : 0;
     }
+    
+    $reset_query = 'SELECT COUNT(*) as total FROM reset_senha_solicitacoes WHERE status = \'pendente\'';
+    $reset_result = mysqli_query($conexao, $reset_query);
+    if ($reset_result) {
+        $row = mysqli_fetch_assoc($reset_result);
+        $sidebar_stats['reset_pendentes'] = $row ? $row['total'] : 0;
+    }
 }
 ?>
 <!-- Main Sidebar Container -->
@@ -86,7 +93,12 @@ if (isset($conexao)) {
                         <li class='nav-item'>
                             <a href='#' onclick="loadInIframe('reset_senha_admin.php', 'Gerenciar Reset de Senha')" class='nav-link <?php echo isActive('reset_senha_admin.php'); ?>' data-toggle='tooltip' data-placement='right' title='Gerenciar solicitações de reset de senha'>
                                 <i class='far fa-circle nav-icon'></i>
-                                <p>Gerenciar Reset</p>
+                                <p>
+                                    Gerenciar Reset
+                                    <?php if ($sidebar_stats['reset_pendentes'] > 0): ?>
+                                        <span class='right badge badge-danger'><?php echo $sidebar_stats['reset_pendentes']; ?></span>
+                                    <?php endif; ?>
+                                </p>
                             </a>
                         </li>
                     </ul>
