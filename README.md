@@ -22,12 +22,29 @@ Este projeto implementa um sistema completo de analise de dados para o site da C
 - `Chart.js`
 - `DataTables`
 - `Docker`
+- `Dash/Plotly` (para dashboard opcional)
 
-## Preview
+## Dashboard Opcional em Python
 
-<p align="center">
-  <img src="screenshot.png" title="screenshot" alt="screenshot do sistema">
-</p>
+O projeto inclui um dashboard adicional desenvolvido com Dash e Plotly para analise avancada de dados.
+
+### Como executar:
+1. Instale as dependencias Python:
+   ```
+   pip install -r requirements.txt
+   ```
+2. Execute o dashboard:
+   ```
+   python dashboard/app.py
+   ```
+3. Acesse: http://localhost:8050
+
+Este dashboard conecta-se ao banco de dados MySQL e fornece visualizacoes interativas de visitas, requisicoes e horarios de pico.
+
+## Creditos
+- Desenvolvido como parte do Projeto Integrador IV - UNIVESP
+- Equipe: DRP01-Projeto Integrador em Computacao IV-Turma 001
+- Instituicao: Universidade Virtual do Estado de Sao Paulo (UNIVESP)
 
 ## Arquitetura do Sistema
 
