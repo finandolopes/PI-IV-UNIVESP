@@ -1,22 +1,33 @@
-# CONFINTER - Sistema de Análise e Visualização de Dados
+# Sistema de Analise e Visualizacao de Dados - PI IV UNIVESP
 
-## Demonstração
+> Sistema de Analise e Visualizacao de Dados - PI IV UNIVESP
 
-Acesse o site de demonstração hospedado gratuitamente para testes: [www.confinter.rg.gd](http://www.confinter.rg.gd)
+## Indice
+- [Link do projeto:](http://www.confinter.rg.gd/)
+- [📖 Sobre](#-Sobre)
+- [🚀 Tecnologias utilizadas](#-Tecnologias-utilizadas)
+- [🖥 Preview](#-Preview)
+- [📌 Creditos](#-Creditos)
 
-## Atualizações Recentes (Setembro 2025)
-- Validacao de Sessao: Implementada em todas as paginas admin para seguranca
-- Logs de Auditoria: Sistema completo de rastreamento de acoes (login/logout/backup)
-- Backup Automatico: Pagina admin para backup do banco de dados
-- Seguranca Aprimorada: Hash de senhas, prepared statements, protecao contra SQL injection
-- Layout Responsivo: Melhorias na interface para dispositivos moveis
-- Acessibilidade: Adicao de atributos ARIA e navegacao por teclado
-- Paginacao: Tabelas com paginacao automatica via DataTables
-- Relatorios Avancados: Dashboard de relatorios com graficos de visitas, requisicoes e auditoria
-- Analise de Acesso: Tempo de acesso por pagina, usuarios ativos, categorias de requisicao
+## Sobre
+Este projeto implementa um sistema completo de analise de dados para o site da CONFINTER, incluindo dashboard interativo, analise exploratoria e modelos de machine learning para previsao de horarios de pico.
 
-## Visão Geral
-Este projeto implementa um sistema completo de análise de dados para o site da CONFINTER, incluindo dashboard interativo, análise exploratória e modelos de machine learning para previsão de horários de pico.
+## Tecnologias utilizadas
+- `PHP`
+- `Python`
+- `HTML`
+- `CSS`
+- `Javascript`
+- `MySQL`
+- `Chart.js`
+- `DataTables`
+- `Docker`
+
+## Preview
+
+<p align="center">
+  <img src="screenshot.png" title="screenshot" alt="screenshot do sistema">
+</p>
 
 ## Arquitetura do Sistema
 
