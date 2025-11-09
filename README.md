@@ -1,79 +1,83 @@
 # CONFINTER - Sistema de Análise e Visualização de Dados
 
-## 🆕 **Atualizações Recentes (Setembro 2025)**
-- ✅ **Validação de Sessão**: Implementada em todas as páginas admin para segurança
-- ✅ **Logs de Auditoria**: Sistema completo de rastreamento de ações (login/logout/backup)
-- ✅ **Backup Automático**: Página admin para backup do banco de dados
-- ✅ **Segurança Aprimorada**: Hash de senhas, prepared statements, proteção contra SQL injection
-- ✅ **Layout Responsivo**: Melhorias na interface para dispositivos móveis
-- ✅ **Acessibilidade**: Adição de atributos ARIA e navegação por teclado
-- ✅ **Paginação**: Tabelas com paginação automática via DataTables
-- ✅ **Relatórios Avançados**: Dashboard de relatórios com gráficos de visitas, requisições e auditoria
-- ✅ **Análise de Acesso**: Tempo de acesso por página, usuários ativos, categorias de requisição
+## Demonstração
+
+Acesse o site de demonstração hospedado gratuitamente para testes: [www.confinter.rg.gd](http://www.confinter.rg.gd)
+
+## Atualizações Recentes (Setembro 2025)
+- Validacao de Sessao: Implementada em todas as paginas admin para seguranca
+- Logs de Auditoria: Sistema completo de rastreamento de acoes (login/logout/backup)
+- Backup Automatico: Pagina admin para backup do banco de dados
+- Seguranca Aprimorada: Hash de senhas, prepared statements, protecao contra SQL injection
+- Layout Responsivo: Melhorias na interface para dispositivos moveis
+- Acessibilidade: Adicao de atributos ARIA e navegacao por teclado
+- Paginacao: Tabelas com paginacao automatica via DataTables
+- Relatorios Avancados: Dashboard de relatorios com graficos de visitas, requisicoes e auditoria
+- Analise de Acesso: Tempo de acesso por pagina, usuarios ativos, categorias de requisicao
 
 ## Visão Geral
 Este projeto implementa um sistema completo de análise de dados para o site da CONFINTER, incluindo dashboard interativo, análise exploratória e modelos de machine learning para previsão de horários de pico.
 
-## 🏗️ **Arquitetura do Sistema**
+## Arquitetura do Sistema
 
-### 📁 **Estrutura Completa do Projeto**
+### Estrutura Completa do Projeto
 ```
-├── 🗄️ sql/
+├── sql/
 │   ├── confinter.sql                    # Banco de dados original
-│   ├── esquema_completo_confinter.sql  # ✅ Esquema completo consolidado
+│   ├── esquema_completo_confinter.sql  # Esquema completo consolidado
 │   ├── reset_senha.sql                 # Script para reset de senha
-│   ├── README_ESQUEMA_COMPLETO.md      # ✅ Documentação completa do BD
-│   └── atualizacoes_analise.sql        # Atualizações para análise
-├── 🔧 php/
-│   ├── conexao.php                     # Conexão com BD
-│   ├── process.php                     # Processamento de formulários
-│   ├── processa_reset_senha.php        # ✅ Sistema de reset de senha
+│   ├── README_ESQUEMA_COMPLETO.md      # Documentacao completa do BD
+│   └── atualizacoes_analise.sql        # Atualizacoes para analise
+├── php/
+│   ├── conexao.php                     # Conexao com BD
+│   ├── process.php                     # Processamento de formularios
+│   ├── processa_reset_senha.php        # Sistema de reset de senha
 │   ├── etl_limpeza.php                 # Script ETL de limpeza
-│   └── atualizar_bd.php                # Script de atualização do BD
-├── 🛡️ admin/
-│   ├── reset_senha.php                 # ✅ Gestão de reset de senha
+│   └── atualizar_bd.php                # Script de atualizacao do BD
+├── admin/
+│   ├── reset_senha.php                 # Gestao de reset de senha
 │   ├── monitoramento.php               # Monitoramento em tempo real
 │   └── ...                            # Outros arquivos admin
-├── 📊 dashboard/
+├── dashboard/
 │   └── app.py                          # Dashboard Dash/Plotly (opcional)
-├── 🤖 ml_php_avancado.php               # Exemplo ML avançado (PHP-ML)
-├── ⚡ tempo_real.html                   # Interface tempo real
-├── 🔌 api/
+├── ml_php_avancado.php               # Exemplo ML avancado (PHP-ML)
+├── tempo_real.html                   # Interface tempo real
+├── api/
 │   └── get_dados_tempo_real.php        # API REST para dados
-├── 📈 previsao_php.php                 # Previsão de picos em PHP
-├── 🎛️ dashboard_php.php                # Dashboard interativo em PHP
-├── 🔍 analise_exploratoria.py           # Análise exploratória (Python)
-├── 🎯 previsao_pico.py                 # Modelo ML (Python)
-├── 📋 requirements.txt                 # Dependências Python
-├── ⚙️ config.php                        # ✅ Configurações centralizadas
-├── 🚀 install.sh                        # ✅ Script de instalação automática
-├── 🔒 .htaccess                         # ✅ Segurança e otimização web
-├── 🤖 robots.txt                        # ✅ Controle de indexação SEO
-├── 🗺️ sitemap.xml                       # ✅ Mapa do site para SEO
-├── 🌐 nginx.conf                        # ✅ Configuração Nginx (exemplo)
-├── 🐳 docker-compose.yml                # ✅ Implantação com Docker
-├── 🐳 Dockerfile                        # ✅ Imagem personalizada
-├── 🚫 .gitignore                        # ✅ Controle de versionamento
-└── 📖 README.md                         # Este arquivo
+├── previsao_php.php                 # Previsao de picos em PHP
+├── dashboard_php.php                # Dashboard interativo em PHP
+├── analise_exploratoria.py           # Analise exploratoria (Python)
+├── previsao_pico.py                 # Modelo ML (Python)
+├── requirements.txt                 # Dependencias Python
+├── config.php                        # Configuracoes centralizadas
+├── install.sh                        # Script de instalacao automatica
+├── .htaccess                         # Seguranca e otimizacao web
+├── robots.txt                        # Controle de indexacao SEO
+├── sitemap.xml                       # Mapa do site para SEO
+├── nginx.conf                        # Configuracao Nginx (exemplo)
+├── docker-compose.yml                # Implantacao com Docker
+├── Dockerfile                        # Imagem personalizada
+├── .gitignore                        # Controle de versionamento
+└── README.md                         # Este arquivo
 ```
 
-## 🗄️ **Esquema de Banco de Dados Completo**
+## Esquema de Banco de Dados Completo
 
-### 🎯 **Instalação Rápida (Recomendado)**
+### Instalacao Rapida (Recomendado)
 ```bash
-# Executar script de instalação automática
+# Executar script de instalacao automatica
 chmod +x install.sh
 ./install.sh
 ```
 
-**O script fará automaticamente:**
-- ✅ Criação do banco de dados
-- ✅ Instalação do esquema completo
-- ✅ Configuração das conexões PHP
-- ✅ Criação do arquivo .htaccess
-- ✅ Verificação da instalação
+O script fara automaticamente:
+- Criacao do banco de dados
+- Instalacao do esquema completo
+- Configuracao das conexoes PHP
+- Criacao do arquivo .htaccess
+- Verificacao da instalacao
 
-### 📋 **Instalação Manual**
+### Instalacao Manual
 ```bash
 # 1. Criar banco
 mysql -u root -p -e "CREATE DATABASE confinter;"
@@ -81,32 +85,32 @@ mysql -u root -p -e "CREATE DATABASE confinter;"
 # 2. Executar esquema
 mysql -u root -p confinter < sql/esquema_completo_confinter.sql
 
-# 3. Configurar conexões
+# 3. Configurar conexoes
 cp config.php php/conexao.php
 # Edite as credenciais no arquivo
 ```
 
-### ⚙️ **Configuração do Sistema**
-1. **Arquivo `config.php`**: Todas as configurações centralizadas
-2. **Arquivo `php/conexao.php`**: Credenciais do banco de dados
-3. **Arquivo `.htaccess`**: Regras de segurança e otimização
+### Configuracao do Sistema
+1. Arquivo `config.php`: Todas as configuracoes centralizadas
+2. Arquivo `php/conexao.php`: Credenciais do banco de dados
+3. Arquivo `.htaccess`: Regras de seguranca e otimizacao
 
 ---
 
-## 🚀 **Métodos de Implantação**
+## Metodos de Implantacao
 
-### 🐳 **Opção 1: Docker (Recomendado para Desenvolvimento)**
+### Opcao 1: Docker (Recomendado para Desenvolvimento)
 ```bash
 # Construir e iniciar containers
 docker-compose up -d
 
-# Acessar aplicação
+# Acessar aplicacao
 # Web: http://localhost:8080
 # phpMyAdmin: http://localhost:8081
 # MySQL: localhost:3306
 ```
 
-### 🌐 **Opção 2: Servidor Web Tradicional**
+### Opcao 2: Servidor Web Tradicional
 ```bash
 # Apache + PHP
 sudo apt install apache2 php mysql-server
@@ -115,75 +119,75 @@ sudo apt install apache2 php mysql-server
 sudo apt install nginx php-fpm mysql-server
 ```
 
-### ☁️ **Opção 3: Nuvem (AWS/Google Cloud/Azure)**
+### Opcao 3: Nuvem (AWS/Google Cloud/Azure)
 - Use os arquivos `docker-compose.yml` e `nginx.conf`
-- Configure variáveis de ambiente
-- Use serviços gerenciados de banco de dados
+- Configure variaveis de ambiente
+- Use servicos gerenciados de banco de dados
 
 ---
 
-## 🔒 **Segurança e Otimização**
+## Seguranca e Otimizacao
 
-### 🛡️ **Configurações de Segurança**
-- **`.htaccess`**: Proteção contra acesso não autorizado
-- **`robots.txt`**: Controle de indexação por motores de busca
-- **`nginx.conf`**: Configuração segura para Nginx
-- **`config.php`**: Credenciais centralizadas e seguras
+### Configuracoes de Seguranca
+- `.htaccess`: Protecao contra acesso nao autorizado
+- `robots.txt`: Controle de indexacao por motores de busca
+- `nginx.conf`: Configuracao segura para Nginx
+- `config.php`: Credenciais centralizadas e seguras
 
-### ⚡ **Otimizações Implementadas**
-- **Compressão GZIP**: Redução de tamanho de arquivos
-- **Cache de navegador**: Melhoria de performance
-- **Otimização de imagens**: Carregamento mais rápido
-- **Minificação**: Redução de CSS/JavaScript
+### Otimizacoes Implementadas
+- Compressao GZIP: Reducao de tamanho de arquivos
+- Cache de navegador: Melhoria de performance
+- Otimizacao de imagens: Carregamento mais rapido
+- Minificacao: Reducao de CSS/JavaScript
 
-### 🔍 **SEO e Performance**
-- **`sitemap.xml`**: Mapa do site para motores de busca
-- **Meta tags otimizadas**: Melhoria de indexação
-- **URLs amigáveis**: Estrutura de links otimizada
-- **Performance monitoring**: Métricas em tempo real
+### SEO e Performance
+- `sitemap.xml`: Mapa do site para motores de busca
+- Meta tags otimizadas: Melhoria de indexacao
+- URLs amigaveis: Estrutura de links otimizada
+- Performance monitoring: Metricas em tempo real
 
 ---
 
-## 📊 **Funcionalidades do Sistema**
+## Funcionalidades do Sistema
 
-### ✅ **Análise Exploratória (`analise_php.php`)**
+### Analise Exploratoria (analise_php.php)
 - Visitas por dia/hora
-- Requisições por categoria
-- Taxa de conversão
-- Top páginas visitadas
-- Análise por dia da semana
+- Requisicoes por categoria
+- Taxa de conversao
+- Top paginas visitadas
+- Analise por dia da semana
 
-### ✅ **Previsão de Picos (`previsao_php.php`)**
-- Algoritmo de tendência linear
-- Média móvel simples
-- Fatores de ajuste (dia útil, horário comercial)
-- Classificação de picos (Alto/Médio/Normal)
-- Salvamento automático no banco
+### Previsao de Picos (previsao_php.php)
+- Algoritmo de tendencia linear
+- Media movel simples
+- Fatores de ajuste (dia util, horario comercial)
+- Classificacao de picos (Alto/Medio/Normal)
+- Salvamento automatico no banco
 
-### ✅ **Dashboard Interativo (`dashboard_php.php`)**
-- Gráficos com Chart.js
-- Métricas em tempo real
-- Heatmap de horários por dia
+### Dashboard Interativo (dashboard_php.php)
+- Graficos com Chart.js
+- Metricas em tempo real
+- Heatmap de horarios por dia
 - Tabela de dados recentes
 - Interface responsiva
 
-### ✅ **Monitoramento em Tempo Real**
-- Atualização automática a cada 30 segundos
+### Monitoramento em Tempo Real
+- Atualizacao automatica a cada 30 segundos
 - Alertas para picos de visita
-- Métricas live (visitas hoje, última hora, conversão)
-- API REST para integração
+- Metricas live (visitas hoje, ultima hora, conversao)
+- API REST para integracao
 
-### ✅ **Sistema de Reset de Senha**
-- Solicitação segura por usuários
-- Aprovação por administradores
-- Geração automática de novas senhas
-- Gestão completa de solicitações
+### Sistema de Reset de Senha
+- Solicitacao segura por usuarios
+- Aprovacao por administradores
+- Geracao automatica de novas senhas
+- Gestao completa de solicitacoes
 
 ---
 
-## 🛠️ **Configuração e Instalação**
+## Configuracao e Instalacao
 
-### 1. **Pré-requisitos**
+### 1. Pre-requisitos
 ```bash
 # PHP 8.1+
 # MySQL 8.0+
@@ -191,16 +195,16 @@ sudo apt install nginx php-fpm mysql-server
 # Composer (opcional)
 ```
 
-### 2. **Instalação Automática**
+### 2. Instalacao Automatica
 ```bash
-# Tornar script executável
+# Tornar script executavel
 chmod +x install.sh
 
-# Executar instalação
+# Executar instalacao
 ./install.sh
 ```
 
-### 3. **Configuração Manual**
+### 3. Configuracao Manual
 ```bash
 # 1. Configurar banco de dados
 mysql -u root -p < sql/esquema_completo_confinter.sql
@@ -209,15 +213,15 @@ mysql -u root -p < sql/esquema_completo_confinter.sql
 cp config.php php/conexao.php
 # Editar credenciais no arquivo
 
-# 3. Configurar permissões
+# 3. Configurar permissoes
 chmod 755 .
 chmod 644 *.php
 chmod 644 *.html
 ```
 
-### 4. **Testar Instalação**
+### 4. Testar Instalacao
 ```bash
-# Testar conexão com banco
+# Testar conexao com banco
 php php/conexao.php
 
 # Testar contador de visitas
@@ -229,16 +233,16 @@ tail -f /var/log/apache2/error.log
 
 ---
 
-## 🎯 **Uso do Sistema**
+## Uso do Sistema
 
-### 📱 **Interface Web**
-- **Página Principal**: `http://localhost/index.php`
-- **Dashboard**: `http://localhost/dashboard_php.php`
-- **Análise**: `http://localhost/analise_php.php`
-- **Previsão**: `http://localhost/previsao_php.php`
-- **Admin**: `http://localhost/admin/login.php`
+### Interface Web
+- Pagina Principal: http://localhost/index.php
+- Dashboard: http://localhost/dashboard_php.php
+- Analise: http://localhost/analise_php.php
+- Previsao: http://localhost/previsao_php.php
+- Admin: http://localhost/admin/login.php
 
-### 🔌 **API REST**
+### API REST
 ```bash
 # Dados em tempo real
 GET /api/get_dados_tempo_real.php
@@ -252,9 +256,9 @@ GET /api/get_dados_tempo_real.php
 }
 ```
 
-### 📊 **Dashboard Python (Opcional)**
+### Dashboard Python (Opcional)
 ```bash
-# Instalar dependências
+# Instalar dependencias
 pip install -r requirements.txt
 
 # Executar dashboard
@@ -265,9 +269,9 @@ python dashboard/app.py
 
 ---
 
-## 🔧 **Manutenção e Monitoramento**
+## Manutencao e Monitoramento
 
-### 📋 **Tarefas de Manutenção**
+### Tarefas de Manutencao
 ```bash
 # Backup do banco
 mysqldump -u user -p confinter > backup_$(date +%Y%m%d).sql
@@ -275,48 +279,48 @@ mysqldump -u user -p confinter > backup_$(date +%Y%m%d).sql
 # Limpeza de logs antigos
 php php/etl_limpeza.php
 
-# Otimização de tabelas
+# Otimizacao de tabelas
 mysql -u user -p confinter -e "OPTIMIZE TABLE contador_visitas;"
 
-# Verificação de integridade
+# Verificacao de integridade
 php -l *.php
 ```
 
-### 📊 **Monitoramento**
-- **Logs de erro**: `/var/log/apache2/error.log`
-- **Logs de acesso**: `/var/log/apache2/access.log`
-- **Métricas do sistema**: Acesse admin/monitoramento.php
-- **Performance**: Use ferramentas como New Relic ou similar
+### Monitoramento
+- Logs de erro: /var/log/apache2/error.log
+- Logs de acesso: /var/log/apache2/access.log
+- Metricas do sistema: Acesse admin/monitoramento.php
+- Performance: Use ferramentas como New Relic ou similar
 
 ---
 
-## 🐛 **Solução de Problemas**
+## Solucao de Problemas
 
-### ❌ **Erro de Conexão com Banco**
+### Erro de Conexao com Banco
 ```bash
-# Verificar se MySQL está rodando
+# Verificar se MySQL esta rodando
 sudo systemctl status mysql
 
-# Testar conexão
+# Testar conexao
 mysql -u user -p -e "SELECT 1;"
 
 # Verificar credenciais em config.php
 cat config.php | grep -E "(DB_|MYSQL_)"
 ```
 
-### ❌ **Erro 500 - Internal Server Error**
+### Erro 500 - Internal Server Error
 ```bash
 # Verificar logs
 tail -f /var/log/apache2/error.log
 
-# Verificar permissões
+# Verificar permissoes
 ls -la *.php
 
 # Testar sintaxe PHP
 php -l arquivo.php
 ```
 
-### ❌ **Página Não Carrega**
+### Pagina Nao Carrega
 ```bash
 # Verificar .htaccess
 cat .htaccess
@@ -329,21 +333,21 @@ mv .htaccess.bak .htaccess
 
 ---
 
-## � **Documentação Técnica**
+## Documentacao Tecnica
 
-### 🗄️ **Banco de Dados**
-- **Arquivo**: `sql/README_ESQUEMA_COMPLETO.md`
-- **Tabelas**: 15 tabelas principais
-- **Relacionamentos**: Chaves estrangeiras definidas
-- **Índices**: Otimizados para performance
+### Banco de Dados
+- Arquivo: sql/README_ESQUEMA_COMPLETO.md
+- Tabelas: 15 tabelas principais
+- Relacionamentos: Chaves estrangeiras definidas
+- Indices: Otimizados para performance
 
-### ⚙️ **Configurações**
-- **Arquivo**: `config.php`
-- **Parâmetros**: 50+ configurações centralizadas
-- **Segurança**: Credenciais protegidas
-- **Performance**: Cache e otimização
+### Configuracoes
+- Arquivo: config.php
+- Parametros: 50+ configuracoes centralizadas
+- Seguranca: Credenciais protegidas
+- Performance: Cache e otimizacao
 
-### 🔒 **Segurança**
+### Seguranca
 - **Arquivo**: `.htaccess`
 - **Proteções**: XSS, CSRF, SQL Injection
 - **Acesso**: Controle de diretórios sensíveis
@@ -351,9 +355,9 @@ mv .htaccess.bak .htaccess
 
 ---
 
-## 🤝 **Contribuição e Desenvolvimento**
+## Contribuição e Desenvolvimento
 
-### 🛠️ **Ambiente de Desenvolvimento**
+### Ambiente de Desenvolvimento
 ```bash
 # Clonar repositório
 git clone https://github.com/seu-usuario/confinter.git
@@ -367,13 +371,13 @@ composer install  # se usar PHP dependencies
 npm install       # se usar Node.js
 ```
 
-### 📝 **Padrões de Código**
+### Padrões de Código
 - **PHP**: PSR-12
 - **JavaScript**: ESLint
 - **SQL**: Uppercase keywords
 - **HTML**: Semantic HTML5
 
-### 🧪 **Testes**
+### Testes
 ```bash
 # Executar testes PHP
 vendor/bin/phpunit
@@ -387,29 +391,29 @@ curl -s http://localhost/ | tidy -q -e
 
 ---
 
-## 📞 **Suporte e Contato**
+## Suporte e Contato
 
-### 📧 **Canais de Suporte**
-- **Issues**: GitHub Issues
-- **Wiki**: Documentação completa
-- **Email**: suporte@confinter.com
+### Canais de Suporte
+- Issues: GitHub Issues
+- Wiki: Documentacao completa
+- Email: suporte@confinter.com
 
-### 📖 **Recursos Adicionais**
-- [Documentação da API](api/README.md)
-- [Guia de Instalação](INSTALL.md)
+### Recursos Adicionais
+- [Documentacao da API](api/README.md)
+- [Guia de Instalacao](INSTALL.md)
 - [FAQ](FAQ.md)
 - [Changelog](CHANGELOG.md)
 
 ---
 
-## 📄 **Licença**
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+## Licenca
+Este projeto esta sob a licenca MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
 ---
 
-**Status**: ✅ Sistema 100% funcional e documentado
-**Versão**: 2.0.0
-**Data**: 06/09/2025
-**Mantenedor**: Equipe CONFINTER
+Status: Sistema 100% funcional e documentado
+Versao: 2.0.0
+Data: 06/09/2025
+Mantenedor: Equipe CONFINTER
 
 
